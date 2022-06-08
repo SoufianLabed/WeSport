@@ -9,7 +9,7 @@ const HomeStack = createStackNavigator()
 
 function HomeStackScreen() {
     return (
-        <HomeStack.Navigator>
+        <HomeStack.Navigator style="header: { visible: false }">
             <HomeStack.Screen name='Login' component={Login} />
             <HomeStack.Screen name='SwiperStarter' component={SwiperStarter} />
         </HomeStack.Navigator>
