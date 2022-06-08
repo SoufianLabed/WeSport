@@ -1,4 +1,4 @@
-<img src="logo.png" align="center" width="500px"/>
+<img src="logoWeSport.png" align="center" width="500px"/>
 
 
 **👱‍♂️ Let's connect sporty !**
