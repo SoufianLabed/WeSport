@@ -1,11 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
  const Test = ()=> {
   return (
     <View>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>TEST</Text>
       <StatusBar style="auto" />
     </View>
   );
