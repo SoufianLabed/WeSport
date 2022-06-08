@@ -1,9 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
 import tailwind from 'tailwind-rn';
- const Login = () =>{
+
+const Login = ({navigation}) =>{
   return (
     <View>
         <Text style={tailwind('border-solid border-4 text-center')}>HELLO WORLD</Text>
+        <Button title="Swiper" onPress={() => navigation.navigate("SwiperStarter")} />
     </View>
   );
 }
