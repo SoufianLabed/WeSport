@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import tailwind from 'tailwind-rn';
 import { Link } from '@react-navigation/native';
@@ -12,6 +13,17 @@ import { Link } from '@react-navigation/native';
      
       </TouchableHighlight>
     </View> 
+=======
+import { Button, StyleSheet, Text, View } from 'react-native';
+import tailwind from 'tailwind-rn';
+
+const Login = ({navigation}) =>{
+  return (
+    <View>
+        <Text style={tailwind('border-solid border-4 text-center')}>HELLO WORLD</Text>
+        <Button title="Swiper" onPress={() => navigation.navigate("SwiperStarter")} />
+    </View>
+>>>>>>> ef1091cc8e80f63870d68574543ce3fbf735e3de
   );
 }
 export default Login;
