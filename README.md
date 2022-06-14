@@ -13,8 +13,8 @@ Application mobile basé sur React Native, qui permet de trouver des sportifs, o
 ## ⚙ Installation
 
 1. Download or clone repository
-2. `cd app-wework` to go to doc
-3. `cd app-wework` to install dependicies
+2. `cd weSport` to go to folder
+3. `npm install` to install dependicies
 2. `yarn start` to launch project
 
 ## ✨Usage
