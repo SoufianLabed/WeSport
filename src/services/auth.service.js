@@ -27,6 +27,7 @@ class AuthService {
     await AsyncStorage.removeItem("user");
   }
   register(username, email, password) {
+    console.log("AUTH SERVICE",username, email, password)
     return axios.post(API_URL + "signup", {
       username,
       email,

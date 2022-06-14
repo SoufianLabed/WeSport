@@ -14,22 +14,12 @@ import {
 import AppContext from '../context/AppContext'
 
 const Register = ({ navigation: { navigate } }) => {
-
-    /*
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: "",
-      password: "",
-      loading: false,
-      message: ""
-    };
-  }*/
   
   const {userLogged, setUserLogged} = useContext(AppContext)
   const [data, setData] = React.useState({
     email: '',
     password: '',
+    username:'',
     confirm_password: "",
     check_TextInputChange: false,
     secureTextEntry: true,
@@ -46,6 +36,13 @@ const handleConfirmPasswordChange = (val) => {
     setData({
         ...data,
         confirm_password: val
+    })
+}
+
+const handleUsernameChange = (val) => {
+    setData({
+        ...data,
+        username: val
     })
 }
 
@@ -79,13 +76,13 @@ const textInputChange = (val) => {
     }
 }
 
-const onSignUp = (email , password) => {
-    console.log(email , password);
+const onSignUp = (email , password,username) => {
+    console.log("Register",email , password,username);
    
     AuthService.register(
-        data.username,
-        data.email,
-        data.password
+        username,
+        email,
+        password
       ).then(
         response => {
          
@@ -126,6 +123,24 @@ const onSignUp = (email , password) => {
                      size={20} />
                     : null}
             </View>
+
+            <Text style={styles.text_footer}>Username</Text>
+            <View style={styles.action}>
+                <TextInput
+                    placeholder="Your Username"
+                    style={styles.textInput}
+                    autoCapitalize='none'
+                    onChangeText={(val) => handleUsernameChange(val)}
+                />
+                {data.check_TextInputChange ?
+                     <Feather
+                     name='check-circle'
+                     color='green'
+                     size={20} />
+                    : null}
+            </View>
+
+            
             <Text style={[styles.text_footer, { marginTop: 35 }]}>Password</Text>
             <View style={styles.action}>
                 <TextInput
@@ -161,7 +176,7 @@ const onSignUp = (email , password) => {
                 <Text style={styles.text_error} > The passwords have to be the same</Text>
                 : null}
             <Button title='Sign In' onPress={() => navigation.navigate('Login')} />
-            <Button title='Sign Up' onPress={() => onSignUp(data.email,data.password)}/>
+            <Button title='Sign Up' onPress={() => onSignUp(data.email,data.password,data.username)}/>
         </View>
     </View>
     );

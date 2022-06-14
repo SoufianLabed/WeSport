@@ -20,7 +20,7 @@ import { UserContext } from '../context/AppContextLogin';
 const Login =  ({ navigation: { navigate } }) =>  {
 
     
-    const [text, setText] = useState('')
+    //const [text, setText] = useState('')
     //const {userLogged, setUserLogged} = useContext(AppContext)
 
     const {userContext, setUserContext} = useContext(UserContext)
@@ -192,62 +192,3 @@ const styles = StyleSheet.create({
   }
 
   export default Login;
-
-/*<TextInput style={styles.textInput} onChangeText={(value)=> setText(value)}></TextInput>
-  
-
-
-
-
-        <View style={styles.container}>
-            <MapView  />
-        <View style={styles.header}>
-            <Text style={styles.text_header}>
-                Welcome 
-                </Text>
-        </View>
-        <View style={styles.footer}>
-            <Text style={styles.text_footer}>Email</Text>
-            <View style={styles.action}>
-              
-                <TextInput
-                    placeholder="Your Email"
-                    style={styles.textInput}
-                    autoCapitalize='none'
-                    onChangeText={(val) => textInputChange(val)}
-                />
-                {data.check_TextInputChange ?
-                    <Feather
-                        name='check-circle'
-                        color='green'
-                        size={20} />
-                    : null}
-            </View>
-            <Text style={[styles.text_footer, { marginTop: 35 }]}>Password</Text>
-            <View style={styles.action}>
-             
-                <TextInput
-                    placeholder="Your Password"
-                    style={styles.textInput}
-                    autoCapitalize='none'
-                    secureTextEntry={data.secureTextEntry}
-                    onChangeText={(val) => handlePasswordChange(val)} />
-                <Feather
-                    name='eye-off'
-                    color='grey'
-                    size={20}
-                    onPress={() => eyePressed()}
-                />
-            </View>
-            <Button title='Sign In' onPress={() => {onSignIn(data.email,data.password)}} />
-            <Button title='Sign Up' onPress={() => navigate('Register')} />
-
-            <TextInput style={styles.textInput} onChangeText={(value)=> setText(value)}></TextInput>
-            <Button title='set Counter' onPress={()=>setUserLogged(text)} />
-
-            
- 
-            
-        </View>
-    </View><Button title='set Counter' onPress={()=>setCounter(text)} />
-*/
