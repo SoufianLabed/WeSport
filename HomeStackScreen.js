@@ -1,13 +1,13 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 
-import Login from './src/Screen/Login'
-import Test from './src/Screen/Test'
+import Login from './src/Screen/Login';
+
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Map from './src/Screen/Map'
 
-
-import Message from './src/Screen/Message'
+import Home from './src/Screen/Home';
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator();
@@ -15,23 +15,24 @@ const Tab = createBottomTabNavigator();
 
 function StackScreen() {
     return (
-        <Tab.Navigator 
+        <Tab.Navigator   
           screenOptions={{
           tabBarStyle: {
             height: 90,
           },
+          headerShown: false,
           tabBarActiveTintColor: '#091833',
           tabBarInactiveColor: '#98AAD2',
     
         }} >
-            <Tab.Screen name='Login' component={Login}  options={{    
+            <Tab.Screen name='Login' component={Map}  options={{    
           tabBarLabel: '',
           tabBarIcon: ({ color, size }) => (
             <Icon name="home" size={size}  color={color} > </Icon>
           )
         }}/>
 
-        <Tab.Screen name="Message" component={Message} options={{ 
+        <Tab.Screen name="Message" component={Login} options={{ 
           inactiveColor:"red",   
           tabBarLabel: '',
           tabBarIcon: ({ color, size }) => (
@@ -54,7 +55,7 @@ function StackScreen() {
           ),
           
         }}/>
-            <Tab.Screen name="Settings" component={Test}  options={{    
+            <Tab.Screen name="Settings" component={Login}  options={{    
           tabBarLabel: '',
           tabBarIcon: ({ color, size }) => (
             <Icon name="user" size={size} color={color}></Icon>

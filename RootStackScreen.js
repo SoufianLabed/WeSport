@@ -2,25 +2,21 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import * as React from 'react';
 import 'react-native-gesture-handler';
-
-import Login from "./src/Screen/login";
-import Register from './src/Screen/register';
+import Login from "./src/Screen/Login";
+import Register from './src/Screen/Register';
 import AuthService from "./src/services/auth.service";
-
 import SwiperStarter from './src/Screen/SwiperStarter';
-import Home from './src/Screen/home';
+import Home from './src/Screen/Home';
 import { useState, useEffect,useContext,useCallback,useReducer } from 'react';
-
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
 import { AppProvider } from './src/context/AppContext';
-
 import AppContext from "./src/context/AppContext";
 import Map from './src/Screen/Map';
-
 import reducer from './src/reducer/reducer';
+import { UserContext } from './src/context/AppContextLogin';
+import StackScreen from './HomeStackScreen';
 
 
 
@@ -34,8 +30,10 @@ const RootStackScreen = (props) =>{
   //const [showAdminBoard, setShowAdminBoard] = useState(false);
 
 
- const {userLogged, setUserLogged} = useContext(AppContext)
+ //const {userLogged, setUserLogged} = useContext(AppContext)
 
+ const {userContext, setUserContext} = useContext(UserContext)
+ 
   const initialState = {count: 0};
   const [state,dispatch] = useReducer(reducer,initialState)
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -43,23 +41,19 @@ const RootStackScreen = (props) =>{
 
   useEffect(() => {
     console.log("state in parent component",state)
-    console.log("userLogged in parent component",userLogged)
-  }, []);
+    console.log("userContext in parent component",userContext)
+  }, [userContext]);
 
 
   const logOut = () => {
     AuthService.logout();
   };
   
-  console.log("currentUser before Routes",state.count)
-  return userLogged === true ? (
+  console.log("userContext before Routes",userContext)
+  return userContext ? (
     <AppProvider>
       <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Map" component={Map} />
-          <Stack.Screen name="SwiperStarter" component={SwiperStarter} />
-        </Stack.Navigator>
+        <StackScreen/>
       </NavigationContainer>
     </AppProvider>
 
@@ -79,6 +73,15 @@ const RootStackScreen = (props) =>{
 export default RootStackScreen;
 
 /**
+ * 
+ * 
+ *      <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Map" component={Map} />
+          <Stack.Screen name="SwiperStarter" component={SwiperStarter} />
+        </Stack.Navigator>
+      </NavigationContainer>
  * 
  */
 

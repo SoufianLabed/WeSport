@@ -10,7 +10,7 @@ const Map = ({navigation}) =>{
   const {counter, setCounter} = useContext(AppContext)
   return (
     <View style={styles.container}>
-      <Text>T</Text>
+      <Text>MAP SCREEN</Text>
   </View>
   );
 }

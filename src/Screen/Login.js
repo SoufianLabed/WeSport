@@ -15,13 +15,15 @@ import {
 import AppContext from "../context/AppContext";
 
 import reducer from "../reducer/reducer";
-
+import { UserContext } from '../context/AppContextLogin';
   
 const Login =  ({ navigation: { navigate } }) =>  {
 
     
     const [text, setText] = useState('')
-    const {userLogged, setUserLogged} = useContext(AppContext)
+    //const {userLogged, setUserLogged} = useContext(AppContext)
+
+    const {userContext, setUserContext} = useContext(UserContext)
 
 
     const [data, setData] = React.useState({
@@ -72,9 +74,9 @@ const Login =  ({ navigation: { navigate } }) =>  {
             async (data) => {
                 try{
                     console.log("login",data)
-                    setUserLogged(data)
-                    dispatch({type: 'increment'})
-                    console.log("state",state)
+                    setUserContext(data)
+                    //dispatch({type: 'increment'})
+                    console.log("userCOntext in Login.js",userContext)
                   }catch(e){
                     console.log(e)
                   }

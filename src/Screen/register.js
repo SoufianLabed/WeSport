@@ -163,7 +163,6 @@ const onSignUp = (email , password) => {
             <Button title='Sign In' onPress={() => navigation.navigate('Login')} />
             <Button title='Sign Up' onPress={() => onSignUp(data.email,data.password)}/>
         </View>
-        <Text>Value of userLogged : {userLogged}</Text>
     </View>
     );
   }
