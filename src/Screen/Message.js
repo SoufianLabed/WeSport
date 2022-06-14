@@ -15,7 +15,7 @@
 //   );
 // }
 // export default Message;
-
+/*
 import React from 'react';
 import { View, Text, Button, StyleSheet, FlatList } from 'react-native';
 import {
@@ -110,3 +110,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
 });
+*/
