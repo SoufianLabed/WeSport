@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import * as React from 'react';
 import 'react-native-gesture-handler';
 import Login from "./src/Screen/Login";
-import Register from './src/Screen/Register';
+
 import AuthService from "./src/services/auth.service";
 import SwiperStarter from './src/Screen/SwiperStarter';
 import Home from './src/Screen/Home';

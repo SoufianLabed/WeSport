@@ -50,7 +50,7 @@ const RootStackScreen = (props) =>{
   };
   
   console.log("userContext before Routes",userContext)
-  return userContext ? (
+  return true ? (
     <AppProvider>
       <NavigationContainer>
         <StackScreen/>
