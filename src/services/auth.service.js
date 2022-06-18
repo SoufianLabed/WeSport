@@ -2,7 +2,7 @@ import axios from "axios";
 import  AsyncStorage  from '@react-native-async-storage/async-storage';
 import authHeader from "./auth-header";
 
-const API_URL = "http://cca1-2a01-e34-ec4d-1580-d19f-cb5f-9676-4a14.ngrok.io/api/auth/";
+const API_URL = "http://f201-2a01-e34-ec4d-1580-5bc-4e2d-f7a8-4194.ngrok.io/api/auth/";
 
 
 class AuthService {
@@ -15,18 +15,6 @@ class AuthService {
         username,
         password
       })
-      /*
-      .then(response => {
-        if (response.data.accessToken) {
-          try{
-            AsyncStorage.setItem("user", JSON.stringify(response.data));
-          }catch(e){
-            console.log(e)
-          }
-        
-        }
-        return response.data;
-      });*/
   }
   async logout() {
     await AsyncStorage.removeItem("user");
@@ -50,15 +38,5 @@ class AuthService {
     return;
   }
 
-
-  async getMeeting() {
-    try{
-      return await axios.get(API_URL + 'meeting', { headers: authHeader() });
-    }catch(e){
-      console.log(e)
-    }
-    
-    return;
-  }
 }
 export default new AuthService();

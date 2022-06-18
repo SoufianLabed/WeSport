@@ -40,17 +40,16 @@ const RootStackScreen = (props) =>{
 
 
   useEffect(() => {
-    console.log("state in parent component",state)
-    console.log("userContext in parent component",userContext)
+
   }, [userContext]);
 
 
   const logOut = () => {
     AuthService.logout();
   };
-  
-  console.log("userContext before Routes",userContext)
-  return true ? (
+
+
+  return userContext ? (
     <AppProvider>
       <NavigationContainer>
         <StackScreen/>

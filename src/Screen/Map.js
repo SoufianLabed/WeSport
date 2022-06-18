@@ -6,12 +6,18 @@ import AppContext from '../context/AppContext'
 import {Marker, Callout } from 'react-native-maps';
 import MapView from "react-native-map-clustering";
 import * as Location from 'expo-location';
+import userService from '../services/user.service';
 
 const Map = ({navigation}) =>{
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+  const [meetings,setMeetings] = useState([]);
+
   useEffect(() => {
     (async () => {
+      let meetings = await userService.getMeeting()
+      console.log("meetings",meetings.data);
+      setMeetings(meetings.data)
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         setErrorMsg('Permission to access location was denied');
@@ -19,9 +25,6 @@ const Map = ({navigation}) =>{
       }
 
       let location2 = await Location.getCurrentPositionAsync({});
-
-      console.log("location",location)
-      //console.log("coordX",location.coords.latitude)
       setLocation(location2);
 
     })();
@@ -45,14 +48,13 @@ const Map = ({navigation}) =>{
   };
 
 
-  function renderRandomMarkers(n) {
-    const { latitude, longitude, latitudeDelta, longitudeDelta } = initialRegion;
-    return new Array(n).fill().map((x, i) => (
+  function renderRandomMarkers(meetings) {
+    return meetings.map((meeting, i) => (
       <Marker
         key={i}
         coordinate={{
-          latitude: latitude + (Math.random() - 0.5) * latitudeDelta,
-          longitude: longitude + (Math.random() - 0.5) * longitudeDelta
+          latitude: parseFloat(meeting.latitude),
+          longitude: parseFloat(meeting.longitude)
         }}
       >
         <Callout>
@@ -69,7 +71,7 @@ const Map = ({navigation}) =>{
       <MapView
         initialRegion={initialRegion}
         style={styles.map}>
-        {renderRandomMarkers(144)}
+        {renderRandomMarkers(meetings)}
       </MapView>
 
         

@@ -16,6 +16,7 @@ import AppContext from "../context/AppContext";
 
 import reducer from "../reducer/reducer";
 import { UserContext } from '../context/AppContextLogin';
+import tailwind from "tailwind-rn";
   
 const Login =  ({ navigation: { navigate } }) =>  {
 
@@ -35,8 +36,6 @@ const Login =  ({ navigation: { navigate } }) =>  {
 
 
     const initialState = {count: 0};
-
-    const [state, dispatch] = useReducer(reducer, initialState);
 
     
     const handlePasswordChange = (val) => {
@@ -71,16 +70,14 @@ const Login =  ({ navigation: { navigate } }) =>  {
 
     const  onSignIn = async (username , password) => {
         const Auth = AuthService.login(username, password).then(
-            async (data) => {
+            async (response) => {
                 try{
-                    console.log("login",data)
-                    setUserContext(data)
-                    //dispatch({type: 'increment'})
-                    console.log("userCOntext in Login.js",userContext)
+                    setUserContext(response.data)
+                    await AsyncStorage.setItem("user", JSON.stringify(response.data));
                   }catch(e){
                     console.log(e)
                   }
-                  return data;
+                  return response;
             },
             error => {
               const resMessage =
@@ -95,11 +92,62 @@ const Login =  ({ navigation: { navigate } }) =>  {
 
 
     }
-    
-const styles = StyleSheet.create({
+
+    return (
+        <View style={styles.container}>
+        <View style={styles.header}>
+            <Image
+                style={styles.logoHK}
+                source={require('../../assets/wesport.jpg')}/>
+            <Text style={tailwind('text-center pt-10 text-xl font-bold')}>Connexion</Text>
+        </View>
+        <View style={styles.footer}>
+            <Text style={styles.text_footer}>Email</Text>
+            <View style={styles.action}>
+              
+                <TextInput
+                    placeholder="Your Email"
+                    style={styles.textInput}
+                    autoCapitalize='none'
+                    onChangeText={(val) => textInputChange(val)}
+                />
+                {data.check_TextInputChange ?
+                    <Feather
+                        name='check-circle'
+                        color='green'
+                        size={20} />
+                    : null}
+            </View>
+            <Text style={[styles.text_footer, { marginTop: 35 }]}>Password</Text>
+            <View style={styles.action}>
+             
+                <TextInput
+                    placeholder="Your Password"
+                    style={styles.textInput}
+                    autoCapitalize='none'
+                    secureTextEntry={data.secureTextEntry}
+                    onChangeText={(val) => handlePasswordChange(val)} />
+                <Feather
+                    name='eye-off'
+                    color='grey'
+                    size={20}
+                    onPress={() => eyePressed()}
+                />
+            </View>
+            <Button title='Sign In' onPress={() => {onSignIn(data.email,data.password)}} />
+            <Button title='Sign Up' onPress={() => navigate('Register')} />
+            <Button title='TEST' style={{width:'10'}}/>
+            
+        </View>
+    </View>
+    );
+  }
+
+  
+  const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#009387'
+        backgroundColor: 'white'
     },
     header: {
         flex: 1,
@@ -137,58 +185,11 @@ const styles = StyleSheet.create({
         color: '#05375a',
     },
     logoHK: {
-        top: 40,
+        top: 100,
         left: '11%',
         height: 200,
         width: 300,
     }
 })
-    return (
-        <View style={styles.container}>
-        <View style={styles.header}>
-            <Text style={styles.text_header}>
-                Welcome {state.count}
-                </Text>
-        </View>
-        <View style={styles.footer}>
-            <Text style={styles.text_footer}>Email</Text>
-            <View style={styles.action}>
-              
-                <TextInput
-                    placeholder="Your Email"
-                    style={styles.textInput}
-                    autoCapitalize='none'
-                    onChangeText={(val) => textInputChange(val)}
-                />
-                {data.check_TextInputChange ?
-                    <Feather
-                        name='check-circle'
-                        color='green'
-                        size={20} />
-                    : null}
-            </View>
-            <Text style={[styles.text_footer, { marginTop: 35 }]}>Password</Text>
-            <View style={styles.action}>
-             
-                <TextInput
-                    placeholder="Your Password"
-                    style={styles.textInput}
-                    autoCapitalize='none'
-                    secureTextEntry={data.secureTextEntry}
-                    onChangeText={(val) => handlePasswordChange(val)} />
-                <Feather
-                    name='eye-off'
-                    color='grey'
-                    size={20}
-                    onPress={() => eyePressed()}
-                />
-            </View>
-            <Button title='Sign In' onPress={() => {onSignIn(data.email,data.password)}} />
-            <Button title='Sign Up' onPress={() => navigate('Register')} />
-            
-        </View>
-    </View>
-    );
-  }
 
   export default Login;

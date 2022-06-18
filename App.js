@@ -23,6 +23,8 @@ const App = (props) =>{
 
   const [userContext, setUserContext] = useState(null)
 
+  
+
   return (
         <UserContext.Provider value={{userContext,setUserContext}}>
           <RootStackScreen/>
