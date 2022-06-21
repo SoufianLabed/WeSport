@@ -17,7 +17,6 @@ import Map from './src/Screen/Map';
 import reducer from './src/reducer/reducer';
 import { UserContext } from './src/context/AppContextLogin';
 import StackScreen from './HomeStackScreen';
-import LoadingHome from "./src/Screen/LoadingHome";
 
 
 
@@ -61,17 +60,10 @@ const RootStackScreen = (props) =>{
   (
     <AppProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="LoadingHome">
-          {/*<Stack.Screen name="Register" component={Register} />*/}
-          {/*<Stack.Screen name="Login" component={Login} />*/}
-          <Stack.Screen name="LoadingHome" component={LoadingHome} />
-
+        <Stack.Navigator initialRouteName="Login">
+          <Stack.Screen name="Register" component={Register} />
+          <Stack.Screen name="Login" component={Login} />
         </Stack.Navigator>
-        {/*<Stack.Navigator initialRouteName="LoadingHome">*/}
-        {/*  <Stack.Screen name="LoadingHome" component={LoadingHome} />*/}
-        {/*  /!*<Stack.Screen name="Register" component={Register} />*!/*/}
-        {/*  /!*<Stack.Screen name="Login" component={Login} />*!/*/}
-        {/*</Stack.Navigator>*/}
     </NavigationContainer>
     </AppProvider>
   )

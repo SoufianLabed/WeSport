@@ -169,7 +169,9 @@ const Login =  ({ navigation: { navigate } }) =>  {
         backgroundColor: '#F5F9FA',
         alignItems: 'center',
         justifyContent: 'center',
-        overflow : 'scroll'
+        overflow : 'scroll',
+        paddingRight : 36,
+        paddingLeft : 36
     },
     header: {
         flex: 1,
@@ -187,7 +189,8 @@ const Login =  ({ navigation: { navigate } }) =>  {
       fontSize : 35,
       lineHeight:53,
       marginTop : 30,
-      marginBottom: 50
+      marginBottom: 50,
+      color : '#091833'
 
     },
     footer: {
