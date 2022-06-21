@@ -8,12 +8,17 @@ import {
     Platform,
     StyleSheet,
     Image,
+<<<<<<< HEAD
     Button,
     Pressable
+=======
+    Button, Pressable
+>>>>>>> ea9e609 (register page done, fix something in login page)
 } from 'react-native';
 
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 import AppContext from '../context/AppContext'
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 
 const Register = ({ navigation: { navigate } }) => {
   
@@ -104,6 +109,7 @@ const onSignUp = (email , password,username) => {
 
     return (
         <KeyboardAwareScrollView
+<<<<<<< HEAD
         resetScrollToCoords={{ x: 0, y: 0 }}
         style={{ backgroundColor: '#F5F9FA' }}
         scrollEnabled={true}>
@@ -134,23 +140,46 @@ const onSignUp = (email , password,username) => {
                      size={20} />
                     : null}
             </View>
+=======
+            resetScrollToCoords={{ x: 0, y: 0 }}
+            style={{ backgroundColor: '#F5F9FA' }}
+            scrollEnabled={true}>
+            <View style={styles.container}>
+                <View style={styles.header}>
+                    {/*<Text style={styles.text_header}>*/}
+                    {/*    Welcome !*/}
+                    {/*    </Text>*/}
+                    <Image style={styles.profilPicture}>
+>>>>>>> ea9e609 (register page done, fix something in login page)
 
-            <Text style={styles.text_footer}>Username</Text>
-            <View style={styles.action}>
-                <TextInput
-                    placeholder="Your Username"
-                    style={styles.textInput}
-                    autoCapitalize='none'
-                    onChangeText={(val) => handleUsernameChange(val)}
-                />
-                {data.check_TextInputChange ?
-                     <Feather
-                     name='check-circle'
-                     color='green'
-                     size={20} />
-                    : null}
-            </View>
+                    </Image>
+                    <Pressable style={styles.cameraButton}>
+                        <Feather
+                            name='camera'
+                            color='white'
+                            size={20}
+                        />
+                    </Pressable>
+                </View>
+                <View style={styles.footer}>
+                    <Text style={styles.text_footer}>Prénom - Nom</Text>
+                    <View style={styles.action}>
+                        <TextInput
+                            placeholder="Ex : Rafael David "
+                            style={styles.textInput}
+                            autoCapitalize='none'
+                            onChangeText={(val) => textInputChange(val)}
+                        />
+                        {data.check_TextInputChange ?
+                             <Feather
+                                 style={styles.iconInput}
+                                 name='check-circle'
+                                 color='green'
+                                 size={20} />
+                            : null}
+                    </View>
 
+<<<<<<< HEAD
             
             <Text style={[styles.text_footer]}>Password</Text>
             <View style={styles.action}>
@@ -196,6 +225,85 @@ const onSignUp = (email , password,username) => {
         </View>
     </View>
     </KeyboardAwareScrollView>
+=======
+                    <Text style={styles.text_footer}>Numéro de téléphone</Text>
+                    <View style={styles.action}>
+                        <TextInput
+                            placeholder="Ex : 06 66 82 97 85"
+                            style={styles.textInput}
+                            autoCapitalize='none'
+                            onChangeText={(val) => handleUsernameChange(val)}
+                        />
+                        {data.check_TextInputChange ?
+                             <Feather
+                                 style={styles.iconInput}
+                                 name='check-circle'
+                                 color='green'
+                                 size={20} />
+                            : null}
+                    </View>
+                    <Text style={styles.text_footer}>Email</Text>
+                    <View style={styles.action}>
+                        <TextInput
+                            placeholder="Ex : rafael.david@gmail.com"
+                            style={styles.textInput}
+                            autoCapitalize='none'
+                            onChangeText={(val) => handleUsernameChange(val)}
+                        />
+                        {data.check_TextInputChange ?
+                            <Feather
+                                style={styles.iconInput}
+                                name='check-circle'
+                                color='green'
+                                size={20} />
+                            : null}
+                    </View>
+
+
+                    <Text style={styles.text_footer}>Password</Text>
+                    <View style={styles.action}>
+                        <TextInput
+                            placeholder="Your password"
+                            style={styles.textInput}
+                            autoCapitalize='none'
+                            secureTextEntry={data.secureTextEntry}
+                            onChangeText={(val) => handlePasswordChange(val)} />
+                            <Feather
+                                style={styles.iconInput}
+                                name='eye-off'
+                                color='grey'
+                                size={20}
+                                onPress={() => updateSecureTextEntry()}
+                            />
+                    </View>
+                    <Text style={styles.text_footer}>Confirm Password</Text>
+                    <View style={styles.action}>
+
+                        <TextInput
+                            placeholder="Confirm your password"
+                            style={styles.textInput}
+                            autoCapitalize='none'
+                            secureTextEntry={data.ConfirmSecureTextEntry}
+                            onChangeText={(val) => handleConfirmPasswordChange(val)} />
+                        <Feather
+                            style={styles.iconInput}
+                            name='eye-off'
+                            color='grey'
+                            size={18}
+                            onPress={() => updateSecureTextEntry()}
+                            />
+                    </View>
+                    {data.password !== data.confirm_password ?
+                        <Text style={styles.text_error} > The passwords have to be the same</Text>
+                        : null}
+                    <Pressable style={styles.button} onPress={() => onSignUp(data.email,data.password,data.username)}>
+                        <Text style={styles.buttonText}>Enregistre et continue</Text>
+                    </Pressable>
+                </View>
+            </View>
+        </KeyboardAwareScrollView>
+
+>>>>>>> ea9e609 (register page done, fix something in login page)
     );
   }
   export default Register;

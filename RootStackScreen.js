@@ -58,18 +58,10 @@ const RootStackScreen = (props) =>{
   (
     <AppProvider>
       <NavigationContainer>
-<<<<<<< HEAD
         <Stack.Navigator initialRouteName="Login"  screenOptions={{headerShown: false }}>
           <Stack.Screen name="Swiper" component={SwiperStarter} />
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="Login" component={Login} />
-=======
-        <Stack.Navigator initialRouteName="LoadingHome">
-          {/*<Stack.Screen name="Register" component={Register} />*/}
-          {/*<Stack.Screen name="Login" component={Login} />*/}
-          <Stack.Screen name="LoadingHome" component={LoadingHome} />
-
->>>>>>> 2ecb16a (add loading homepage, add new design on login page)
         </Stack.Navigator>
         {/*<Stack.Navigator initialRouteName="LoadingHome">*/}
         {/*  <Stack.Screen name="LoadingHome" component={LoadingHome} />*/}
