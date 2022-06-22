@@ -8,12 +8,9 @@ import {
     Platform,
     StyleSheet,
     Image,
-<<<<<<< HEAD
+
     Button,
     Pressable
-=======
-    Button, Pressable
->>>>>>> ea9e609 (register page done, fix something in login page)
 } from 'react-native';
 
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
@@ -109,38 +106,6 @@ const onSignUp = (email , password,username) => {
 
     return (
         <KeyboardAwareScrollView
-<<<<<<< HEAD
-        resetScrollToCoords={{ x: 0, y: 0 }}
-        style={{ backgroundColor: '#F5F9FA' }}
-        scrollEnabled={true}>
-        <View style={styles.container}>
-        <View style={styles.header}>
-        <Pressable style={styles.cameraButton}>
-            <Feather
-             name='camera'
-             color='white'
-             size={20}
-             />
-        </Pressable>
-
-        </View>
-        <View style={styles.footer}>
-            <Text style={styles.text_footer}>Email</Text>
-            <View style={styles.action}>
-                <TextInput
-                    placeholder="Your Email"
-                    style={styles.textInput}
-                    autoCapitalize='none'
-                    onChangeText={(val) => textInputChange(val)}
-                />
-                {data.check_TextInputChange ?
-                     <Feather
-                     name='check-circle'
-                     color='green'
-                     size={20} />
-                    : null}
-            </View>
-=======
             resetScrollToCoords={{ x: 0, y: 0 }}
             style={{ backgroundColor: '#F5F9FA' }}
             scrollEnabled={true}>
@@ -150,7 +115,6 @@ const onSignUp = (email , password,username) => {
                     {/*    Welcome !*/}
                     {/*    </Text>*/}
                     <Image style={styles.profilPicture}>
->>>>>>> ea9e609 (register page done, fix something in login page)
 
                     </Image>
                     <Pressable style={styles.cameraButton}>
@@ -178,54 +142,6 @@ const onSignUp = (email , password,username) => {
                                  size={20} />
                             : null}
                     </View>
-
-<<<<<<< HEAD
-            
-            <Text style={[styles.text_footer]}>Password</Text>
-            <View style={styles.action}>
-                <TextInput
-                    placeholder="Your Password"
-                    style={styles.textInput}
-                    autoCapitalize='none'
-                    secureTextEntry={data.secureTextEntry}
-                    onChangeText={(val) => handlePasswordChange(val)} />
-                    <Feather
-                        name='eye-off'
-                        color='grey'
-                        size={20}
-                        onPress={() => updateSecureTextEntry()}
-                    />
-            </View>
-            <Text style={[styles.text_footer]}>Confirm Password</Text>
-            <View style={styles.action}>
-
-                <TextInput
-                    placeholder="Confirm your password"
-                    style={styles.textInput}
-                    autoCapitalize='none'
-                    secureTextEntry={data.ConfirmSecureTextEntry}
-                    onChangeText={(val) => handleConfirmPasswordChange(val)} />
-                <Feather
-                        name='eye-off'
-                        color='grey'
-                        size={20}
-                        onPress={() => updateSecureTextEntry()}
-                    />
-            </View>
-            {data.password !== data.confirm_password ?
-                <Text style={styles.text_error} > The passwords have to be the same</Text>
-                : null}
-            <Pressable style={styles.button} onPress={() => onSignUp(data.email,data.password,data.username)}>
-                <Text style={styles.buttonText}>Enregistre et continue</Text>
-            </Pressable>
-            <Pressable style={styles.button} onPress={() =>navigate('Login')}>
-                <Text style={styles.buttonText}>Connexion</Text>
-            </Pressable>
-
-        </View>
-    </View>
-    </KeyboardAwareScrollView>
-=======
                     <Text style={styles.text_footer}>Numéro de téléphone</Text>
                     <View style={styles.action}>
                         <TextInput
@@ -303,13 +219,11 @@ const onSignUp = (email , password,username) => {
             </View>
         </KeyboardAwareScrollView>
 
->>>>>>> ea9e609 (register page done, fix something in login page)
     );
   }
   export default Register;
 
 
- 
   const styles = StyleSheet.create({
     container: {
         flex: 1,
