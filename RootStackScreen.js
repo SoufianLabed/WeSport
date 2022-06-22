@@ -17,7 +17,13 @@ import Map from './src/Screen/Map';
 import CreateMeeting from './src/Screen/CreateMeeting';
 import { UserContext } from './src/context/AppContextLogin';
 import StackScreen from './HomeStackScreen';
+<<<<<<< HEAD
 import LoadingHome from "./src/Screen/LoadingHome";
+=======
+import Profile from "./src/Screen/Profile";
+import BottomNavigation from "./styles/BottomNavigation";
+
+>>>>>>> d272cdc (add profile screen and bottom menu)
 
 
 
@@ -58,10 +64,17 @@ const RootStackScreen = (props) =>{
   (
     <AppProvider>
       <NavigationContainer>
+<<<<<<< HEAD
         <Stack.Navigator initialRouteName="Login"  screenOptions={{headerShown: false }}>
           <Stack.Screen name="Swiper" component={SwiperStarter} />
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="Login" component={Login} />
+=======
+        <Stack.Navigator initialRouteName="Profile">
+        {/*  /!*<Stack.Screen name="Register" component={Register} />*!/*/}
+        {/*  /!*<Stack.Screen name="Login" component={Login} />*!/*/}
+          <Stack.Screen name="Profile" component={Profile} />
+>>>>>>> d272cdc (add profile screen and bottom menu)
         </Stack.Navigator>
         {/*<Stack.Navigator initialRouteName="LoadingHome">*/}
         {/*  <Stack.Screen name="LoadingHome" component={LoadingHome} />*/}
