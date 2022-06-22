@@ -1,167 +1,188 @@
-import React, { useContext,Component,useState,useReducer } from "react";
-import  AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useContext, Component, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import AuthService from "../services/auth.service";
-import Feather from 'react-native-vector-icons/Feather';
+import Feather from "react-native-vector-icons/Feather";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {
-    View,
-    Text,
-    TextInput,
-    Platform,
-    StyleSheet,
-    Image,
-    Button
-} from 'react-native';
+  View,
+  Text,
+  TextInput,
+  Platform,
+  StyleSheet,
+  Image,
+  Button,
+  Pressable, 
+  Linking
+} from "react-native";
 
 import AppContext from "../context/AppContext";
 
-import reducer from "../reducer/reducer";
-import { UserContext } from '../context/AppContextLogin';
+import { UserContext } from "../context/AppContextLogin";
 import tailwind from "tailwind-rn";
-  
-const Login =  ({ navigation: { navigate } }) =>  {
 
-    
-    //const [text, setText] = useState('')
-    //const {userLogged, setUserLogged} = useContext(AppContext)
+const Login = ({ navigation: { navigate } }) => {
+  //const [text, setText] = useState('')
+  //const {userLogged, setUserLogged} = useContext(AppContext)
 
-    const {userContext, setUserContext} = useContext(UserContext)
+  const { userContext, setUserContext } = useContext(UserContext);
 
+  const [data, setData] = React.useState({
+    email: "",
+    password: "",
+    check_TextInputChange: false,
+    secureTextEntry: true,
+  });
 
-    const [data, setData] = React.useState({
-        email: '',
-        password: '',
+  const initialState = { count: 0 };
+
+  const handlePasswordChange = (val) => {
+    setData({
+      ...data,
+      password: val,
+    });
+  };
+
+  const eyePressed = () => {
+    setData({
+      ...data,
+      secureTextEntry: !data.secureTextEntry,
+    });
+  };
+
+  const textInputChange = (val) => {
+    if (val.length != 0) {
+      setData({
+        ...data,
+        email: val,
+        check_TextInputChange: true,
+      });
+    } else {
+      setData({
+        ...data,
+        email: val,
         check_TextInputChange: false,
-        secureTextEntry: true,
-    })
-
-
-    const initialState = {count: 0};
-
-    
-    const handlePasswordChange = (val) => {
-        setData({
-            ...data,
-            password: val
-        })
+      });
     }
+  };
 
-    const eyePressed = () => {
-        setData({
-            ...data,
-            secureTextEntry: !data.secureTextEntry
-        })
-    }
-
-    const textInputChange = (val) => {
-        if (val.length != 0) {
-            setData({
-                ...data,
-                email: val,
-                check_TextInputChange: true
-            })
-        } else {
-            setData({
-                ...data,
-                email: val,
-                check_TextInputChange: false
-            })
+  const onSignIn = async (username, password) => {
+    const Auth = AuthService.login(username, password).then(
+      async (response) => {
+        try {
+          console.log("la réponse",response.data)
+          setUserContext(response.data);
+          await AsyncStorage.setItem("user", JSON.stringify(response.data));
+        } catch (e) {
+          console.log(e);
         }
-    }
+        return response;
+      },
+      (error) => {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+      }
+    );
+  };
 
-    const  onSignIn = async (username , password) => {
-        const Auth = AuthService.login(username, password).then(
-            async (response) => {
-                try{
-                    setUserContext(response.data)
-                    await AsyncStorage.setItem("user", JSON.stringify(response.data));
-                  }catch(e){
-                    console.log(e)
-                  }
-                  return response;
-            },
-            error => {
-              const resMessage =
-                (error.response &&
-                  error.response.data &&
-                  error.response.data.message) ||
-                error.message ||
-                error.toString();
-            }
-          
-          );
-
-
-    }
-
-    return (
-        <View style={styles.container}>
+  return (
+    <KeyboardAwareScrollView
+      resetScrollToCoords={{ x: 0, y: 0 }}
+      style={{ backgroundColor: "#F5F9FA" }}
+      scrollEnabled={true}
+    >
+      <View style={styles.container}>
         <View style={styles.header}>
-            <Image
-                style={styles.logoHK}
-                source={require('../../assets/wesport.jpg')}/>
-            <Text style={tailwind('text-center pt-10 text-xl font-bold')}>Connexion</Text>
+          <Image
+            style={styles.logoHK}
+            source={require("../../assets/wesport.jpg")}
+          />
+          <Text style={styles.txt}>
+            Connexion
+          </Text>
         </View>
         <View style={styles.footer}>
-            <Text style={styles.text_footer}>Email</Text>
-            <View style={styles.action}>
-              
-                <TextInput
-                    placeholder="Your Email"
-                    style={styles.textInput}
-                    autoCapitalize='none'
-                    onChangeText={(val) => textInputChange(val)}
-                />
-                {data.check_TextInputChange ?
-                    <Feather
-                        name='check-circle'
-                        color='green'
-                        size={20} />
-                    : null}
-            </View>
-            <Text style={[styles.text_footer, { marginTop: 35 }]}>Password</Text>
-            <View style={styles.action}>
-             
-                <TextInput
-                    placeholder="Your Password"
-                    style={styles.textInput}
-                    autoCapitalize='none'
-                    secureTextEntry={data.secureTextEntry}
-                    onChangeText={(val) => handlePasswordChange(val)} />
-                <Feather
-                    name='eye-off'
-                    color='grey'
-                    size={20}
-                    onPress={() => eyePressed()}
-                />
-            </View>
-            <Button title='Sign In' onPress={() => {onSignIn(data.email,data.password)}} />
-            <Button title='Sign Up' onPress={() => navigate('Register')} />
-            <Button title='TEST' style={{width:'10'}}/>
-            
-        </View>
-    </View>
-    );
-  }
+          <Text style={styles.text_footer}>Email</Text>
+          <View style={styles.action}>
+            <TextInput
+              placeholder="Your Email"
+              style={styles.textInput}
+              autoCapitalize="none"
+              onChangeText={(val) => textInputChange(val)}
+            />
+            {data.check_TextInputChange ? (
+              <Feather name="check-circle" color="green" size={20} />
+            ) : null}
+          </View>
+          <Text  style={styles.text_footer}>Password</Text>
+          <View style={styles.action}>
+            <TextInput
+              placeholder="Your Password"
+              style={styles.textInput}
+              autoCapitalize="none"
+              secureTextEntry={data.secureTextEntry}
+              onChangeText={(val) => handlePasswordChange(val)}
+            />
+            <Feather
+              style={styles.iconInput}
+              name="eye-off"
+              color="grey"
+              size={20}
+              onPress={() => eyePressed()}
+            />
+          </View>
 
-  
-  const styles = StyleSheet.create({
+            <Pressable style={styles.button} onPress={() => {onSignIn(data.email,data.password)}}>
+                <Text style={styles.buttonText}>Connexion</Text>
+            </Pressable>
+            <Pressable style={styles.button} onPress={() => navigate("Register")}>
+                <Text style={styles.buttonText}>Register</Text>
+            </Pressable>
+        </View>
+      </View>
+    </KeyboardAwareScrollView>
+  );
+};
+
+const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: '#F5F9FA',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow : 'scroll',
+        paddingRight : 36,
+        paddingLeft : 36
     },
     header: {
         flex: 1,
-        justifyContent: 'flex-end',
+        alignItems: 'center',
+        justifyContent: 'center',
         paddingHorizontal: 20,
-        paddingBottom: 50
+        paddingBottom: 50,
+        top: 77
+    },
+    txt: {
+      fontWeight: "bold",
+      fontFamily: "Roboto",
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize : 35,
+      lineHeight:53,
+      marginTop : 30,
+      marginBottom: 50,
+      color : '#091833'
+
     },
     footer: {
         flex: 3,
-        backgroundColor: '#fff',
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
         paddingHorizontal: 20,
-        paddingVertical: 30
+        paddingVertical: 30,
+        width: '90%',
+        top: 20
     },
     text_header: {
         color: '#fff',
@@ -170,26 +191,61 @@ const Login =  ({ navigation: { navigate } }) =>  {
     },
     text_footer: {
         color: '#05375a',
-        fontSize: 18
+        fontSize: 18,
+        fontWeight: "bold"
     },
     action: {
         flexDirection: 'row',
-        marginTop: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: '#f2f2f2',
-        paddingBottom: 5
+        marginTop: 17,
+        paddingBottom: 35,
     },
     textInput: {
         flex: 1,
         paddingLeft: 10,
         color: '#05375a',
+        borderWidth : 1,
+        height: 49,
+        borderTopLeftRadius: 8,
+        borderTopRightRadius: 8,
+        borderBottomLeftRadius: 8,
+        borderBottomRightRadius: 8,
+        borderColor : '#3C5BAA',
+
     },
     logoHK: {
-        top: 100,
-        left: '11%',
-        height: 200,
+        // top: 77,
+        height: 95,
         width: 300,
+    },
+    button: {
+        borderTopLeftRadius: 8,
+        borderTopRightRadius: 8,
+        borderBottomLeftRadius: 8,
+        borderBottomRightRadius: 8,
+        backgroundColor: '#3C5BAA',
+        height: 36,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    buttonText: {
+        color: '#F6F9FA',
+        fontWeight: 'bold',
+        textAlign: 'center'
+    },
+    mdpLink: {
+        color: '#3C5BAA',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign : 'center',
+        marginTop : 20
+    },
+
+    iconInput : {
+       position : 'absolute',
+       right : 5,
+       padding: 15
     }
+
 })
 
-  export default Login;
+export default Login;

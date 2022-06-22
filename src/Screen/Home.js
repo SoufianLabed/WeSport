@@ -1,27 +1,27 @@
 import React, { Component } from "react";
 import UserService from "../services/user.service";
-import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
 
 export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      content: ""
+      content: "",
     };
   }
   componentDidMount() {
     UserService.getPublicContent().then(
-      response => {
+      (response) => {
         this.setState({
-          content: response.data
+          content: response.data,
         });
       },
-      error => {
+      (error) => {
         this.setState({
           content:
             (error.response && error.response.data) ||
             error.message ||
-            error.toString()
+            error.toString(),
         });
       }
     );
@@ -29,7 +29,7 @@ export default class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
-       <Text>HELLO HOME</Text>
+        <Text>HELLO HOME</Text>
       </View>
     );
   }
@@ -39,9 +39,8 @@ export default class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
-
 });

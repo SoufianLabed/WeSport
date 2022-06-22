@@ -7,17 +7,16 @@ import Register from './src/Screen/Register';
 import AuthService from "./src/services/auth.service";
 import SwiperStarter from './src/Screen/SwiperStarter';
 import Home from './src/Screen/Home';
-import { useState, useEffect,useContext,useCallback,useReducer } from 'react';
+import { useState, useEffect,useContext,useCallback } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { AppProvider } from './src/context/AppContext';
 import AppContext from "./src/context/AppContext";
 import Map from './src/Screen/Map';
-import reducer from './src/reducer/reducer';
+import CreateMeeting from './src/Screen/CreateMeeting';
 import { UserContext } from './src/context/AppContextLogin';
 import StackScreen from './HomeStackScreen';
-
 
 
 
@@ -35,12 +34,10 @@ const RootStackScreen = (props) =>{
  const {userContext, setUserContext} = useContext(UserContext)
  
   const initialState = {count: 0};
-  const [state,dispatch] = useReducer(reducer,initialState)
   const [currentUser, setCurrentUser] = useState(undefined);
 
 
   useEffect(() => {
-
   }, [userContext]);
 
 
@@ -60,7 +57,8 @@ const RootStackScreen = (props) =>{
   (
     <AppProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
+        <Stack.Navigator initialRouteName="Login"  screenOptions={{headerShown: false }}>
+          <Stack.Screen name="Swiper" component={SwiperStarter} />
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="Login" component={Login} />
         </Stack.Navigator>

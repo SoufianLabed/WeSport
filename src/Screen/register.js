@@ -8,9 +8,11 @@ import {
     Platform,
     StyleSheet,
     Image,
-    Button
+    Button,
+    Pressable
 } from 'react-native';
 
+import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 import AppContext from '../context/AppContext'
 
 const Register = ({ navigation: { navigate } }) => {
@@ -85,7 +87,7 @@ const onSignUp = (email , password,username) => {
         password
       ).then(
         response => {
-         
+          
         },
         error => {
           const resMessage =
@@ -101,11 +103,20 @@ const onSignUp = (email , password,username) => {
       
 
     return (
+        <KeyboardAwareScrollView
+        resetScrollToCoords={{ x: 0, y: 0 }}
+        style={{ backgroundColor: '#F5F9FA' }}
+        scrollEnabled={true}>
         <View style={styles.container}>
         <View style={styles.header}>
-            <Text style={styles.text_header}>
-                Welcome !
-                </Text>
+        <Pressable style={styles.cameraButton}>
+            <Feather
+             name='camera'
+             color='white'
+             size={20}
+             />
+        </Pressable>
+
         </View>
         <View style={styles.footer}>
             <Text style={styles.text_footer}>Email</Text>
@@ -141,7 +152,7 @@ const onSignUp = (email , password,username) => {
             </View>
 
             
-            <Text style={[styles.text_footer, { marginTop: 35 }]}>Password</Text>
+            <Text style={[styles.text_footer]}>Password</Text>
             <View style={styles.action}>
                 <TextInput
                     placeholder="Your Password"
@@ -156,11 +167,11 @@ const onSignUp = (email , password,username) => {
                         onPress={() => updateSecureTextEntry()}
                     />
             </View>
-            <Text style={[styles.text_footer, { marginTop: 35 }]}>Confirm Password</Text>
+            <Text style={[styles.text_footer]}>Confirm Password</Text>
             <View style={styles.action}>
 
                 <TextInput
-                    placeholder="Your Password"
+                    placeholder="Confirm your password"
                     style={styles.textInput}
                     autoCapitalize='none'
                     secureTextEntry={data.ConfirmSecureTextEntry}
@@ -175,33 +186,65 @@ const onSignUp = (email , password,username) => {
             {data.password !== data.confirm_password ?
                 <Text style={styles.text_error} > The passwords have to be the same</Text>
                 : null}
-            <Button title='Sign In' onPress={() => navigation.navigate('Login')} />
-            <Button title='Sign Up' onPress={() => onSignUp(data.email,data.password,data.username)}/>
+            <Pressable style={styles.button} onPress={() => onSignUp(data.email,data.password,data.username)}>
+                <Text style={styles.buttonText}>Enregistre et continue</Text>
+            </Pressable>
+            <Pressable style={styles.button} onPress={() =>navigate('Login')}>
+                <Text style={styles.buttonText}>Connexion</Text>
+            </Pressable>
+
         </View>
     </View>
+    </KeyboardAwareScrollView>
     );
   }
   export default Register;
 
 
+ 
   const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#009387'
+        backgroundColor: '#F5F9FA',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingRight : 36,
+        paddingLeft : 36
+
     },
     header: {
         flex: 1,
-        justifyContent: 'flex-end',
+        alignItems: 'center',
+        justifyContent: 'center',
         paddingHorizontal: 20,
-        paddingBottom: 50
+        paddingBottom: 50,
+        top: 44
+    },
+    profilPicture :{
+        borderRadius: 1000,
+        borderWidth : 1,
+        borderColor :'#091833',
+        width: 160,
+        height: 160,
+
+    },
+    cameraButton: {
+        position : 'absolute',
+        backgroundColor : '#3C5BAA',
+        top : 115,
+        right : 25,
+        height : 48,
+        width : 48,
+        borderRadius: 50,
+        alignItems : 'center',
+        justifyContent : 'center'
     },
     footer: {
         flex: 3,
-        backgroundColor: '#fff',
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
-        paddingHorizontal: 20,
-        paddingVertical: 30
+        backgroundColor: '#F5F9FA',
+        marginTop : 45,
+        width: '90%',
+        height : '60%'
     },
     text_header: {
         color: '#fff',
@@ -210,20 +253,42 @@ const onSignUp = (email , password,username) => {
     },
     text_footer: {
         color: '#05375a',
-        fontSize: 18
+        fontSize: 18,
+        fontWeight: "bold"
     },
     action: {
         flexDirection: 'row',
-        marginTop: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: '#f2f2f2',
-        paddingBottom: 5
+        marginTop: 17,
+        paddingBottom: 35,
     },
     textInput: {
         flex: 1,
         paddingLeft: 10,
         color: '#05375a',
+        borderWidth : 1,
+        height: 49,
+        borderTopLeftRadius: 8,
+        borderTopRightRadius: 8,
+        borderBottomLeftRadius: 8,
+        borderBottomRightRadius: 8,
+        borderColor : '#3C5BAA',
     },
+     button: {
+          borderTopLeftRadius: 8,
+          borderTopRightRadius: 8,
+          borderBottomLeftRadius: 8,
+          borderBottomRightRadius: 8,
+          backgroundColor: '#3C5BAA',
+          height: 36,
+          alignItems: 'center',
+          justifyContent: 'center',
+         marginBottom : 30
+     },
+     buttonText: {
+          color: '#F6F9FA',
+          fontWeight: 'bold',
+          textAlign: 'center'
+     },
     logoHK: {
         top: 40,
         left: '11%',
@@ -232,5 +297,10 @@ const onSignUp = (email , password,username) => {
     },
     text_error: {
         color: '#FF0000'
+    },
+    iconInput : {
+        position : 'absolute',
+        right : 5,
+        padding: 15
     }
 })
