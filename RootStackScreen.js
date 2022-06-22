@@ -17,6 +17,8 @@ import Map from './src/Screen/Map';
 import reducer from './src/reducer/reducer';
 import { UserContext } from './src/context/AppContextLogin';
 import StackScreen from './HomeStackScreen';
+import Profile from "./src/Screen/Profile";
+import BottomNavigation from "./styles/BottomNavigation";
 
 
 
@@ -60,9 +62,10 @@ const RootStackScreen = (props) =>{
   (
     <AppProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
-          <Stack.Screen name="Register" component={Register} />
-          <Stack.Screen name="Login" component={Login} />
+        <Stack.Navigator initialRouteName="Profile">
+        {/*  /!*<Stack.Screen name="Register" component={Register} />*!/*/}
+        {/*  /!*<Stack.Screen name="Login" component={Login} />*!/*/}
+          <Stack.Screen name="Profile" component={Profile} />
         </Stack.Navigator>
     </NavigationContainer>
     </AppProvider>
