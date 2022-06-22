@@ -1,5 +1,5 @@
 import { useContext,useState,useEffect } from 'react';
-import { Button, StyleSheet, Text, View,Dimensions,Image } from 'react-native';
+import { Button, StyleSheet, Text, View,Dimensions,Image, Pressable } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import tailwind from 'tailwind-rn';
 import AppContext from '../context/AppContext'
@@ -7,6 +7,7 @@ import {Marker, Callout } from 'react-native-maps';
 import MapView from "react-native-map-clustering";
 import * as Location from 'expo-location';
 import userService from '../services/user.service';
+import Feather from 'react-native-vector-icons/Feather';
 
 const Map = ({navigation}) =>{
   const [location, setLocation] = useState(null);
@@ -60,9 +61,42 @@ const Map = ({navigation}) =>{
         style={{width:200}}
       >
         <Callout>
-          <View>
-            <Text style={tailwind("font-bold m-24")}>THIS IS A TEST {i}</Text>
-          </View>
+        <View style={tailwind('flex flex-row')}>
+            <View >
+                <Text style={tailwind('mt-4 text-lg')}>Basket</Text>
+                <Text>Idrissa Mguye</Text>
+                <View style={tailwind('flex flex-row ')}>
+                    <View style={tailwind('flex flex-row  mt-2')}>
+                        <Feather
+                            name='calendar'
+                            size={20}
+                        />
+                        <Text>11/08/2022</Text> 
+                    </View>
+                    <View style={tailwind('flex flex-row  mt-2 ml-3')}>
+                        <Feather
+                            name='clock'
+                            size={20}
+                        />
+                        <Text>18H</Text> 
+                    </View>                                      
+                </View>
+                <View style={tailwind('mt-3 flex flex-row')}>
+                    <Feather
+                        name='map-pin'
+                        size={20}
+                    />
+                    <Text>41 Rue Leclerc - Paris</Text>
+                </View>
+                
+            </View>
+
+            <View style={tailwind('absolute top-0 right-0 h-16 w-20 mt-3')}>
+                <Pressable style={styles.button}>
+                    <Text style={styles.buttonText}>Participer</Text>
+                </Pressable>
+            </View>
+        </View>
         </Callout>
       </Marker>
     ));
@@ -92,6 +126,22 @@ const styles = StyleSheet.create({
       width: Dimensions.get('window').width,
       height: Dimensions.get('window').height,
     },
+    button: {
+      borderTopLeftRadius: 8,
+      borderTopRightRadius: 8,
+      borderBottomLeftRadius: 8,
+      borderBottomRightRadius: 8,
+      backgroundColor: '#3C5BAA',
+      height: 36,
+      alignItems: 'center',
+      justifyContent: 'center',
+     marginBottom : 30
+  },
+  buttonText: {
+        color: '#F6F9FA',
+        fontWeight: 'bold',
+        textAlign: 'center'
+  }
   });
   
 export default Map;
