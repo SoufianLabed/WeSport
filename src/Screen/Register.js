@@ -13,7 +13,6 @@ import {
     Pressable
 } from 'react-native';
 
-import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 import AppContext from '../context/AppContext'
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
 
@@ -111,9 +110,6 @@ const onSignUp = (email , password,username) => {
             scrollEnabled={true}>
             <View style={styles.container}>
                 <View style={styles.header}>
-                    {/*<Text style={styles.text_header}>*/}
-                    {/*    Welcome !*/}
-                    {/*    </Text>*/}
                     <Image style={styles.profilPicture}>
 
                     </Image>

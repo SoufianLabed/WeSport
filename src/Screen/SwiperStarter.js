@@ -20,7 +20,7 @@ const Dots = ({ selected }) => {
                 borderColor: '#3C5BAA',
                 borderWidth : 1,
                 backgroundColor,
-                marginTop : 80
+                marginTop : 10
             }}
         />
     );
