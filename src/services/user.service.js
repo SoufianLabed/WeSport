@@ -3,18 +3,6 @@ import authHeader from "./auth-header";
 const API_URL =
   "http://834e-2a01-e34-ec4d-1580-561-9876-acd7-46ef.ngrok.io/api/test/";
 class UserService {
-  getPublicContent() {
-    return axios.get(API_URL + "all");
-  }
-  getUserBoard() {
-    return axios.get(API_URL + "user", { headers: authHeader() });
-  }
-  getModeratorBoard() {
-    return axios.get(API_URL + "mod", { headers: authHeader() });
-  }
-  getAdminBoard() {
-    return axios.get(API_URL + "admin", { headers: authHeader() });
-  }
 
   async getMeeting() {
     console.log("Header in local storage ! ", await authHeader());
@@ -69,7 +57,9 @@ class UserService {
         "nombre_joueur":meeting.numbre_joueur,
         "plannedAt":meeting.plannedAt,
         "latitude":meeting.latitude,
-        "longitude":meeting.longitude
+        "longitude":meeting.longitude,
+        "city":meeting.city,
+        "address":meeting.address
       } ,{
         headers: authHeader(),
       

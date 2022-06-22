@@ -57,8 +57,8 @@ const Map = ({navigation}) =>{
           longitude: parseFloat(meeting.longitude)
         }}
         icon={require('../../assets/MarkerFootball.png')}
+        style={{width:200}}
       >
-          
         <Callout>
           <View>
             <Text style={tailwind("font-bold m-24")}>THIS IS A TEST {i}</Text>

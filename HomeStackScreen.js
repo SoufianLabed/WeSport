@@ -10,6 +10,7 @@ import Map from './src/Screen/Map'
 import Home from './src/Screen/Home';
 
 import CreateMeeting from './src/Screen/CreateMeeting';
+import Meetings from './src/Screen/Meetings';
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator();
@@ -50,7 +51,7 @@ function StackScreen() {
           
         }} />
 
-            <Tab.Screen name="Home" component={Login}  options={{    
+            <Tab.Screen name="Meetings" component={Meetings}  options={{    
           tabBarLabel: '',
           tabBarIcon: ({ color, size }) => (
             <Icon name="bell" size={size}  color={color}></Icon>

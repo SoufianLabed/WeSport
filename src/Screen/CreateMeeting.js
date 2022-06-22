@@ -85,8 +85,10 @@ const CreateMeeting = ({ navigation: { navigate } }) => {
         time.getMilliseconds()
         ),
     //meeting.plannedAt = ,
-    meeting.latitude = locationInput.lat,
-    meeting.longitude = locationInput.lng
+    meeting.latitude = locationInput.geometry.location.lat,
+    meeting.longitude = locationInput.geometry.location.lng,
+    meeting.city = locationInput.address_components[2].long_name,
+    meeting.address= locationInput.formatted_address
     console.log("meet",meeting)
 
     await userService.postMeeting(meeting)
@@ -111,10 +113,13 @@ const CreateMeeting = ({ navigation: { navigate } }) => {
               
               onSelect={(selectedItem, index) => {
                 console.log(selectedItem, index)
+                onChangeactivityInput(selectedItem)
+                console.log("ici",activityInput)
               }}
               buttonTextAfterSelection={(selectedItem, index) => {
                 // text represented after item is selected
                 // if data array is an array of objects then return selectedItem.property to render after item is selected
+                
                 return selectedItem
               }}
               rowTextForSelection={(item, index) => {
@@ -159,8 +164,10 @@ const CreateMeeting = ({ navigation: { navigate } }) => {
         onFail={(error) => console.error(error)}
         fetchDetails={true}
         onPress={(data, detail = null) => {
-          console.log("detail",detail.geometry.location);
-          setLocationInput(detail.geometry.location)
+          //console.log("ville",detail.vicinity);
+          console.log("address",detail.formatted_address);
+          console.log("VILLE",detail.address_components[2].long_name);
+          setLocationInput(detail)
         }}
         query={{
           key: "AIzaSyBu3rpxeGURsWeIpnTy6oZkgtVbqqtjiNs",
@@ -204,18 +211,28 @@ const CreateMeeting = ({ navigation: { navigate } }) => {
         )}
 
         {!datePicker && (
-          <View style={tailwind('bg-blue-600 m-1')}>
-            <TouchableHighlight style={tailwind('bg-green-600')} onPress={showDatePicker}>
-                <Text>Show Date Picker</Text>
-            </TouchableHighlight>
+          <View style={tailwind('m-1 flex flex-row')}>
+            <Feather
+              name='calendar'
+              size={20}
+              onPress={showDatePicker}
+             />
+              <Text>
+                {date.getDate()+"/"+date.getMonth()}
+             </Text>
           </View>
         )}
 
         {!timePicker && (
-          <View>
-            <TouchableHighlight style={tailwind('bg-red-600 m-1 ')} onPress={showTimePicker} >
-                <Text>Show Time Picker</Text>
-            </TouchableHighlight>
+          <View style={tailwind('flex flex-row')}>
+           <Feather
+              name='clock'
+              size={20}
+              onPress={showTimePicker}
+             />
+             <Text>
+              {time.getHours()+":"+time.getMinutes()}
+             </Text>
           </View>
         )}
 
