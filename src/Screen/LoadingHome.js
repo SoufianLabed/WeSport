@@ -8,11 +8,8 @@ export default class LoadingHome extends Component {
                 <View >
                     <Image
                         style={styles.logoApp}
-                        source={{
-                            uri: 'https://reactnative.dev/img/tiny_logo.png',
-                        }}
+                        source={require('../../images/logo-app.png')}
                     />
-                    <Text style={styles.centerContainer}>HELLO HOME</Text>
                 </View>
 
             </View>
@@ -34,7 +31,9 @@ const styles = StyleSheet.create({
     },
 
     logoApp: {
-
+        width : 428,
+        height : 397,
+        bottom : 50
     }
 
 });
