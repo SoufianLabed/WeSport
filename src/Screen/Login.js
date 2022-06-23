@@ -69,7 +69,6 @@ const Login = ({ navigation: { navigate } }) => {
     const Auth = AuthService.login(username, password).then(
       async (response) => {
         try {
-          console.log("la réponse",response.data)
           setUserContext(response.data);
           await AsyncStorage.setItem("user", JSON.stringify(response.data));
         } catch (e) {
@@ -108,7 +107,7 @@ const Login = ({ navigation: { navigate } }) => {
           <Text style={styles.text_footer}>Email</Text>
           <View style={styles.action}>
             <TextInput
-              placeholder="Your Email"
+              placeholder="Email"
               style={styles.textInput}
               autoCapitalize="none"
               onChangeText={(val) => textInputChange(val)}
@@ -120,7 +119,7 @@ const Login = ({ navigation: { navigate } }) => {
           <Text  style={styles.text_footer}>Password</Text>
           <View style={styles.action}>
             <TextInput
-              placeholder="Your Password"
+              placeholder="Mot de passe"
               style={styles.textInput}
               autoCapitalize="none"
               secureTextEntry={data.secureTextEntry}
@@ -139,7 +138,7 @@ const Login = ({ navigation: { navigate } }) => {
                 <Text style={styles.buttonText}>Connexion</Text>
             </Pressable>
             <Pressable style={styles.button} onPress={() => navigate("Register")}>
-                <Text style={styles.buttonText}>Register</Text>
+                <Text style={styles.buttonText}>Inscription</Text>
             </Pressable>
         </View>
       </View>

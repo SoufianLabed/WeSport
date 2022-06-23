@@ -1,5 +1,5 @@
-import React, { useContext,useState,useEffect } from 'react';
-import { Button, StyleSheet, Text, View,Dimensions,Image, Pressable } from 'react-native';
+import { useContext,useState,useEffect } from 'react';
+import { Button, StyleSheet, Text, View,Dimensions,Image, Switch,Pressable } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import tailwind from 'tailwind-rn';
 import AppContext from '../context/AppContext'
@@ -7,7 +7,7 @@ import {Marker, Callout } from 'react-native-maps';
 import MapView from "react-native-map-clustering";
 import * as Location from 'expo-location';
 import userService from '../services/user.service';
-import Feather from 'react-native-vector-icons/Feather';
+import Feather from "react-native-vector-icons/Feather";
 
 const Map = ({navigation}) =>{
   const [location, setLocation] = useState(null);
@@ -17,7 +17,6 @@ const Map = ({navigation}) =>{
   useEffect(() => {
     (async () => {
       let meetings = await userService.getMeeting()
-      console.log("meetings",meetings.data);
       setMeetings(meetings.data)
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
@@ -30,6 +29,11 @@ const Map = ({navigation}) =>{
 
     })();
   }, []);
+
+  const refreshData = async () =>{
+    let meetings = await userService.getMeeting()
+    setMeetings(meetings.data)
+  }
 
 
   const [text, setText] = useState('')
@@ -50,18 +54,19 @@ const Map = ({navigation}) =>{
 
 
   function renderRandomMarkers(meetings) {
+  
     return meetings.map((meeting, i) => (
+    
       <Marker
         key={i}
         coordinate={{
           latitude: parseFloat(meeting.latitude),
           longitude: parseFloat(meeting.longitude)
         }}
-        icon={require('../../assets/MarkerFootball.png')}
-        style={{width:200}}
+        icon={require( `../../assets/marker-${"football"}.png`)}
       >
-        <Callout>
-        <View style={tailwind('flex flex-row')}>
+        <Callout style={tailwind('rounded-lg')}>
+        <View style={tailwind('flex flex-row   ')}>
             <View >
                 <Text style={tailwind('mt-4 text-lg')}>Basket</Text>
                 <Text>Idrissa Mguye</Text>

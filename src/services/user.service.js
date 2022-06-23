@@ -1,11 +1,10 @@
 import axios from "axios";
 import authHeader from "./auth-header";
 const API_URL =
-  "http://834e-2a01-e34-ec4d-1580-561-9876-acd7-46ef.ngrok.io/api/test/";
+  "http://22fb-2a01-e34-ec4d-1580-3425-7aee-3c9-51ab.ngrok.io/api/test/";
 class UserService {
 
   async getMeeting() {
-    console.log("Header in local storage ! ", await authHeader());
     try {
       const meetings = await axios.get(API_URL + "meeting", {
         headers: authHeader(),
@@ -18,11 +17,9 @@ class UserService {
     return;
   }
 
-
-  async getMeetingByIdOwner(idOwner) {
-    console.log("Header in local storage ! ", await authHeader());
+  async getUser(idUser) {
     try {
-      const meetings = await axios.get(API_URL + `getRencontreByIdUser/${idOwner}`,{
+      const meetings = await axios.get(API_URL + `user/${idUser}`, {
         headers: authHeader(),
       });
       return meetings;
@@ -33,13 +30,40 @@ class UserService {
     return;
   }
 
-  async getMeetingParticipationById(idUser) {
-    console.log("Header in local storage ! ", await authHeader());
+
+  async getMeetingByIdOwner(idOwner) {
     try {
-      const meetings = await axios.get(API_URL + `/getParticipationByIdUser/${idUser}`, {
+      console.log("idOwner :",idOwner)
+      const meetings = await axios.get(API_URL + `getRencontreByIdUser/${idOwner}`,{
         headers: authHeader(),
       });
       return meetings;
+    } catch (e) {
+      console.log(e);
+    }
+    return;
+  }
+
+  async getMeetingParticipationById(idUser) {
+    try {
+      console.log("idUser :",idUser)
+      const meetings = await axios.get(API_URL + `getParticipationByIdUser/${idUser}`, {
+        headers: authHeader(),
+      });
+      return meetings;
+    } catch (e) {
+      console.log(e);
+    }
+
+    return;
+  }
+
+  async getParticipationByIdOwner(idOwner) {
+    try {
+      const meetings = await axios.get(API_URL + `getParticipationByIdOwner/${idOwner}`, {
+        headers: authHeader(),
+      });
+      return meetings.data;
     } catch (e) {
       console.log(e);
     }
@@ -48,8 +72,6 @@ class UserService {
   }
 
   async postMeeting(meeting){
-    console.log("Meeting",meeting)
-
     try {
       const meetings = await axios.post(API_URL + "createRencontre", {
         "owner":meeting.owner,
@@ -74,3 +96,4 @@ class UserService {
   }
 }
 export default new UserService();
+
