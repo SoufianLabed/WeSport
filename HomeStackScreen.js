@@ -10,6 +10,7 @@ import Map from './src/Screen/Map'
 import Home from './src/Screen/Home';
 
 import CreateMeeting from './src/Screen/CreateMeeting';
+import RequestMeeting from './src/Screen/RequestMeeting';
 import Meetings from './src/Screen/Meetings';
 
 const Stack = createStackNavigator()
@@ -35,7 +36,7 @@ function StackScreen() {
           )
         }}/>
 
-        <Tab.Screen name="Message" component={Login} options={{ 
+        <Tab.Screen name="RequestMeeting" component={RequestMeeting} options={{ 
           inactiveColor:"red",   
           tabBarLabel: '',
           tabBarIcon: ({ color, size }) => (
