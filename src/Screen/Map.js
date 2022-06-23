@@ -54,36 +54,36 @@ const Map = ({navigation}) =>{
 
 
   function renderRandomMarkers(meetings) {
-  
     return meetings.map((meeting, i) => (
-    
+  
       <Marker
         key={i}
         coordinate={{
           latitude: parseFloat(meeting.latitude),
           longitude: parseFloat(meeting.longitude)
         }}
-        icon={require( `../../assets/marker-${"football"}.png`)}
+       // icon={require( "../../assets/marker-football.png")}
       >
-        <Callout style={tailwind('rounded-lg')}>
+
+        <Callout style={tailwind('rounded-lg w-56')}>
         <View style={tailwind('flex flex-row   ')}>
             <View >
-                <Text style={tailwind('mt-4 text-lg')}>Basket</Text>
-                <Text>Idrissa Mguye</Text>
+                <Text style={tailwind('mt-4 text-lg')}>{meeting.sport}</Text>
+      
                 <View style={tailwind('flex flex-row ')}>
                     <View style={tailwind('flex flex-row  mt-2')}>
                         <Feather
                             name='calendar'
                             size={20}
                         />
-                        <Text>11/08/2022</Text> 
+                        <Text>{new Date(meeting.plannedAt).getFullYear()+"/"+new Date(meeting.plannedAt).getMonth()+"/"+new Date(meeting.plannedAt).getDate() }</Text> 
                     </View>
                     <View style={tailwind('flex flex-row  mt-2 ml-3')}>
                         <Feather
                             name='clock'
                             size={20}
                         />
-                        <Text>18H</Text> 
+                        <Text>{new Date(meeting.plannedAt).getHours()+" : "+new Date(meeting.plannedAt).getMinutes()}</Text> 
                     </View>                                      
                 </View>
                 <View style={tailwind('mt-3 flex flex-row')}>
@@ -91,7 +91,7 @@ const Map = ({navigation}) =>{
                         name='map-pin'
                         size={20}
                     />
-                    <Text>41 Rue Leclerc - Paris</Text>
+                    <Text>{meeting.address}</Text>
                 </View>
                 
             </View>

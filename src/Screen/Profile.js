@@ -1,4 +1,4 @@
-import React, {Component, useContext, useRef} from "react";
+import React, {Component, useContext, useEffect, useRef, useState} from "react";
 import Feather from 'react-native-vector-icons/Feather';
 import AuthService from "../services/auth.service";
 import {
@@ -13,16 +13,20 @@ import {
 
 import AppContext from '../context/AppContext'
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
+import userService from "../services/user.service";
+import { UserContext } from "../context/AppContextLogin";
 
 
 const Profile = ({ navigation: { navigate } }) => {
 
     const inputRef = useRef();
-    const {userLogged, setUserLogged} = useContext(AppContext)
+    const {userContext, setUserContext} = useContext(UserContext)
+    const [userData,setUser] = useState({})
+
     const [data, setData] = React.useState({
-        email: '',
-        password: '',
-        username:'',
+        email: userContext.email,
+        password:'',
+        username: userContext.username,
         check_TextInputChange: false,
         secureTextEntry: true
     })
@@ -43,6 +47,13 @@ const Profile = ({ navigation: { navigate } }) => {
         setData({
             ...data,
             username: val
+        })
+    }
+
+    const handleEmailChange = (val) => {
+        setData({
+            ...data,
+            email: val
         })
     }
 
@@ -80,6 +91,33 @@ const Profile = ({ navigation: { navigate } }) => {
         }
     }
 
+    const updateUserData = async () =>{
+        let userData = {
+            "email": data.email,
+            "id": userContext.id,
+            "username": data.username,
+          }
+          console.log("test id ",userData)
+        await userService.putUser(userData);
+
+        setUserContext(null)
+          
+    }
+
+    useEffect(()=>{
+        try{
+            const fetchUser = async ()=>{
+                const user = await userService.getUser(userContext.id)
+                setUser(user.data)
+                return 
+            } 
+            fetchUser();
+        
+        }catch(e){
+            console.log(e)
+        }
+
+    },[])
 
     return (
         <KeyboardAwareScrollView
@@ -97,13 +135,14 @@ const Profile = ({ navigation: { navigate } }) => {
                     </Pressable>
                 </View>
                 <View style={styles.footer}>
-                    <Text style={styles.text_footer}>Prénom - Nom</Text>
+                    <Text style={styles.text_footer}>Username</Text>
                     <View style={styles.action}>
                         <TextInput
                             placeholder="Ex : Rafael David "
                             style={styles.textInput}
                             autoCapitalize='none'
-                            onChangeText={(val) => textInputChange(val)}
+                            defaultValue={userData.username}
+                            onChangeText={(val) => handleEmailChange(val)}
                         />
                         {data.check_TextInputChange ?
                             <Feather
@@ -124,6 +163,7 @@ const Profile = ({ navigation: { navigate } }) => {
                     <View style={styles.action}>
                         <TextInput
                             placeholder="Ex : rafael.david@gmail.com"
+                            defaultValue={userData.email}
                             style={styles.textInput}
                             autoCapitalize='none'
                             onChangeText={(val) => handleUsernameChange(val)}
@@ -143,36 +183,7 @@ const Profile = ({ navigation: { navigate } }) => {
                             onPress={() => activModify()}
                         />
                     </View>
-
-
-                    <Text style={styles.text_footer}>Password</Text>
-                    <View style={styles.action}>
-                        <TextInput
-                            placeholder="Your password"
-                            style={styles.textInput}
-                            autoCapitalize='none'
-                            secureTextEntry={data.secureTextEntry}
-                            // editable={input.editable}
-                            selectTextOnFocus={input.selectTextOnFocus}
-                            ref={inputRef}
-                            autoFocus={false}
-                            onChangeText={(val) => handlePasswordChange(val)} />
-                        <Feather
-                            style={[{marginRight : 30 }, styles.iconInput]}
-                            name='eye-off'
-                            color='grey'
-                            size={18}
-                            onPress={() => updateSecureTextEntry()}
-                        />
-                        <Feather
-                            style={styles.iconInput}
-                            name='edit-2'
-                            color='#3C5BAA'
-                            size={20}
-                            onPress={() => activModify()}
-                        />
-                    </View>
-                    <Pressable style={styles.button} >
+                    <Pressable style={styles.button} onPress={()=> updateUserData()}>
                         <Text style={styles.buttonText}>Sauvegarder</Text>
                     </Pressable>
                 </View>

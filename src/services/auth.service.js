@@ -4,7 +4,7 @@ import authHeader from "./auth-header";
 
 const API_URL =
   "http://22fb-2a01-e34-ec4d-1580-3425-7aee-3c9-51ab.ngrok.io/api/auth/";
-
+  
 class AuthService {
   async login(username, password) {
     console.log(username, password);

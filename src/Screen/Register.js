@@ -49,6 +49,13 @@ const handleUsernameChange = (val) => {
     })
 }
 
+const handleEmailChange = (val) => {
+    setData({
+        ...data,
+        email: val
+    })
+}
+
 const updateSecureTextEntry = () => {
     setData({
         ...data,
@@ -63,21 +70,7 @@ const updateConfirmSecureTextEntry = () => {
     })
 }
 
-const textInputChange = (val) => {
-    if (val.length != 0) {
-        setData({
-            ...data,
-            email: val,
-            check_TextInputChange: true
-        })
-    } else {
-        setData({
-            ...data,
-            email: val,
-            check_TextInputChange: false
-        })
-    }
-}
+
 
 const onSignUp = (email , password,username) => {
     console.log("Register",email , password,username);
@@ -88,7 +81,7 @@ const onSignUp = (email , password,username) => {
         password
       ).then(
         response => {
-          
+            
         },
         error => {
           const resMessage =
@@ -100,6 +93,8 @@ const onSignUp = (email , password,username) => {
          
         }
       );
+
+      navigate("Login")
 }
       
 
@@ -113,9 +108,7 @@ const onSignUp = (email , password,username) => {
                     {/*<Text style={styles.text_header}>*/}
                     {/*    Welcome !*/}
                     {/*    </Text>*/}
-                    <Image style={styles.profilPicture}>
 
-                    </Image>
                     <Pressable style={styles.cameraButton}>
                         <Feather
                             name='camera'
@@ -129,22 +122,6 @@ const onSignUp = (email , password,username) => {
                     <View style={styles.action}>
                         <TextInput
                             placeholder="Ex : Rafael David "
-                            style={styles.textInput}
-                            autoCapitalize='none'
-                            onChangeText={(val) => textInputChange(val)}
-                        />
-                        {data.check_TextInputChange ?
-                             <Feather
-                                 style={styles.iconInput}
-                                 name='check-circle'
-                                 color='green'
-                                 size={20} />
-                            : null}
-                    </View>
-                    <Text style={styles.text_footer}>Numéro de téléphone</Text>
-                    <View style={styles.action}>
-                        <TextInput
-                            placeholder="Ex : 06 66 82 97 85"
                             style={styles.textInput}
                             autoCapitalize='none'
                             onChangeText={(val) => handleUsernameChange(val)}
@@ -163,7 +140,7 @@ const onSignUp = (email , password,username) => {
                             placeholder="Ex : rafael.david@gmail.com"
                             style={styles.textInput}
                             autoCapitalize='none'
-                            onChangeText={(val) => handleUsernameChange(val)}
+                            onChangeText={(val) => handleEmailChange(val)}
                         />
                         {data.check_TextInputChange ?
                             <Feather

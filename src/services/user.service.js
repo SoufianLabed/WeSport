@@ -19,6 +19,7 @@ class UserService {
 
   async getUser(idUser) {
     try {
+      console.log("l'idUser ici",idUser)
       const meetings = await axios.get(API_URL + `user/${idUser}`, {
         headers: authHeader(),
       });
@@ -82,6 +83,43 @@ class UserService {
         "longitude":meeting.longitude,
         "city":meeting.city,
         "address":meeting.address
+      } ,{
+        headers: authHeader(),
+      
+      });
+      return meetings;
+    } catch (e) {
+      console.log(e);
+    }
+
+    return;
+
+  }
+
+  async putUser(user){
+    try {
+      const meetings = await axios.put(API_URL + "user", {
+        "id":user.id,
+        "email":user.username,
+        "username":user.email,
+      } ,{
+        headers: authHeader(),
+      
+      });
+      return meetings;
+    } catch (e) {
+      console.log(e);
+    }
+    return;
+  }
+
+  async putParticipation(participation){
+    try {
+      const meetings = await axios.put(API_URL + "createParticipation", {
+        "id":user.id,
+        "player_id":user.username,
+        "rencontre_id":user.email,
+        "status":""
       } ,{
         headers: authHeader(),
       
