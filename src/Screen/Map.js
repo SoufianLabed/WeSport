@@ -1,5 +1,5 @@
 import { useContext,useState,useEffect } from 'react';
-import { Button, StyleSheet, Text, View,Dimensions,Image, Switch } from 'react-native';
+import { Button, StyleSheet, Text, View,Dimensions,Image, Switch, Pressable } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import tailwind from 'tailwind-rn';
 import AppContext from '../context/AppContext'
