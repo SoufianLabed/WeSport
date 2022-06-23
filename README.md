@@ -1,4 +1,4 @@
-<img src="logoWeSport.png" align="center" width="500px"/>
+<img src="logoWeSport.png" align="center" width="350px"/>
 
 
 **👱‍♂️ Let's connect sporty !**
@@ -13,9 +13,15 @@ Application mobile basé sur React Native, qui permet de trouver des sportifs, o
 ## ⚙ Installation
 
 1. Download or clone repository
-2. `cd weSport` to go to folder
-3. `npm install` to install dependicies
-2. `yarn start` to launch project
+
+2. Go to folder :
+>`cd weSport`
+
+3. Install dependicies :
+> `yarn install`
+
+4. Launch project :
+> `yarn start`
 
 ## ✨Usage
 
@@ -27,31 +33,47 @@ Application mobile basé sur React Native, qui permet de trouver des sportifs, o
 
 ## 🎉Features
 
-- Landing page
+- Loading page
 
-- Informations Starter Pages
+- SwiperStarter Pages
 
-- Page d'inscription 
+- Register 
 
-- Page de connexion 
+- Login
 
-- Page d'accueil
+- Home
 
-- Messagerie
+- Request from Meeting
 
-- Ajout d'un nouvel événement
+- Add new Meeting
 
-- Alertes
+- Alarm about all Meeting
 
-- Profil
+- Profile
 
 ## 🎩Sources
 
-You can learn more 
+Backend (Spring) : https://github.com/SoufianLabed/We-sport_back
 
-## ⚙ Deployment
+## 📚​ Documentation
 
-This project can be deployed in web browser, ios or android (and emulator)
+React Native : https://reactnative.dev/docs/getting-started
+
+Components : https://reactnative.dev/docs/components-and-apis
+
+## 🔗​ Deployment
+
+This project use Metro and Expo.
+This project can be deployed in web browser, ios or android (and emulator).
+
+U can use : Android/Ios Emulator Extension.
+
+OR :
+1. lauch Metro Building, 
+2. run it in localhost
+3. click "Run on Android device/emulator"
 ## ⌨ License
   
 Licensed under the [MIT](LICENSE) license.
+
+## 🎩Contributor
