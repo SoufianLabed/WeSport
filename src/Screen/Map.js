@@ -104,19 +104,62 @@ const Map = ({navigation}) =>{
   
   return (
     <View style={styles.container}>
-        {/*<TextInput*/}
-        {/*    placeholder="Ex : Rafael David "*/}
-        {/*    style={styles.textInput}*/}
-        {/*    autoCapitalize='none'*/}
-        {/*/>*/}
       <MapView
         initialRegion={initialRegion}
         style={styles.map}>
         {renderRandomMarkers(meetings)}
       </MapView>
+      <TextInput
+          placeholder="Rechercher une ville"
+          style={styles.textInput}
+          autoCapitalize='none'
+          // textAlign='center'
+      />
+      <Feather
+          name="search"
+          color="#3C5BAA"
+          size={20}
+          style={styles.searchIcon}
+      />
+      <View style={styles.boxFilter}>
+          <View style={styles.filters}>
+              <Pressable>
+                  <Image
+                      style={styles.iconFilter}
+                      source={require('../../images/icon-foot.png')}
+                  />
+              </Pressable>
 
-        
-  </View>
+              <Pressable>
+                  <Image
+                      style={styles.iconFilter}
+                      source={require('../../images/icon-tennis.png')}
+                  />
+              </Pressable>
+
+              <Pressable>
+                  <Image
+                      style={styles.iconFilter}
+                      source={require('../../images/icon-basket.png')}
+                  />
+              </Pressable>
+
+              <Pressable>
+                  <Image
+                      style={styles.iconFilter}
+                      source={require('../../images/icon-volley.png')}
+                  />
+              </Pressable>
+
+          </View>
+          <View style={styles.labelFilters}>
+              <Text style={{color : '#09183399', fontStyle : 'italic'}}>Football</Text>
+              <Text style={{color : '#09183399', fontStyle : 'italic'}}>Tennis</Text>
+              <Text style={{color : '#09183399', fontStyle : 'italic'}}>Basket</Text>
+              <Text style={{color : '#09183399', fontStyle : 'italic'}}>Volley</Text>
+          </View>
+      </View>
+    </View>
   );
 }
 
@@ -147,18 +190,57 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center'
   },
-    // textInput: {
-    //     flex: 1,
-    //     paddingLeft: 10,
-    //     color: '#05375a',
-    //     borderWidth : 1,
-    //     height: 49,
-    //     borderTopLeftRadius: 8,
-    //     borderTopRightRadius: 8,
-    //     borderBottomLeftRadius: 8,
-    //     borderBottomRightRadius: 8,
-    //     borderColor : '#3C5BAA',
-    // },
-  });
+    textInput: {
+        flex: 1,
+        paddingLeft: 50,
+        top: 100,
+        width : '75%',
+        position: 'absolute',
+        color: '#05375a',
+        borderWidth : 1,
+        height: 49,
+        borderTopLeftRadius: 8,
+        borderTopRightRadius: 8,
+        borderBottomLeftRadius: 8,
+        borderBottomRightRadius: 8,
+        borderColor : '#3C5BAA',
+        backgroundColor : '#F5F9FA',
+        fontSize : 14
+    },
+    searchIcon: {
+        position : 'absolute',
+        top : 115,
+        left : 60,
+    },
+    boxFilter: {
+        backgroundColor : '#F5F9FA',
+        borderTopLeftRadius: 44,
+        borderTopRightRadius: 44,
+        borderBottomLeftRadius: 44,
+        borderBottomRightRadius: 44,
+        height : 84,
+        width : '80%',
+        bottom : 585
+    },
+    filters: {
+        flexDirection : "row",
+        justifyContent : "space-evenly",
+        top : 10,
+        marginLeft : 8
+
+
+    },
+    iconFilter: {
+        height: 46,
+        width : 46,
+
+    },
+    labelFilters: {
+        flexDirection : "row",
+        justifyContent : "space-evenly",
+        top : 15
+    }
+
+});
   
 export default Map;
