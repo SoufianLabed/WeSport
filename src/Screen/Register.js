@@ -110,6 +110,9 @@ const onSignUp = (email , password,username) => {
             scrollEnabled={true}>
             <View style={styles.container}>
                 <View style={styles.header}>
+                    {/*<Text style={styles.text_header}>*/}
+                    {/*    Welcome !*/}
+                    {/*    </Text>*/}
                     <Image style={styles.profilPicture}>
 
                     </Image>
