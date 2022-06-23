@@ -69,7 +69,6 @@ const Login = ({ navigation: { navigate } }) => {
     const Auth = AuthService.login(username, password).then(
       async (response) => {
         try {
-          console.log("la réponse",response.data)
           setUserContext(response.data);
           await AsyncStorage.setItem("user", JSON.stringify(response.data));
         } catch (e) {

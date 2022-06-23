@@ -32,19 +32,16 @@ const Meetings = ({ navigation: { navigate } }, {}) => {
   const [listDataSource, setlistDataSource] = useState([]);
 
   useEffect(() => {
+    const fetchData = async () => {
+        let responseParticipation =
+          await userService.getMeetingParticipationById(userContext.id);
+        setmeetingParticipation(responseParticipation.data);
+        let response = await userService.getMeetingByIdOwner(userContext.id);
+        setmeetingCreated(response.data);
 
-    (async () => {
-        let responseParticipation = await userService.getMeetingParticipationById(userContext.id);
-        setmeetingParticipation(responseParticipation);
+        console.log("1:", meetingParticipation);
+        console.log("2:", meetingCreated);
 
-
-      
-      let response = await userService.getMeetingByIdOwner(userContext.id);
-      setmeetingCreated(response);
-
-      console.log("1 : ",meetingParticipation)
-      console.log("2 :",meetingCreated)
-  
         let i = 0;
         while (i < meetingParticipation["meetings"].length) {
           let y = 0;
@@ -82,9 +79,12 @@ const Meetings = ({ navigation: { navigate } }, {}) => {
             ),
           },
         ];
-  
+
         setlistDataSource(CONTENT);
-    })();
+
+    };
+
+    fetchData();
   }, []);
 
   const updateLayout = (index) => {

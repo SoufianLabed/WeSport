@@ -24,7 +24,20 @@ class UserService {
       const meetings = await axios.get(API_URL + `getRencontreByIdUser/${idOwner}`,{
         headers: authHeader(),
       });
-      return meetings.data;
+      return meetings;
+    } catch (e) {
+      console.log(e);
+    }
+    return;
+  }
+
+  async getMeetingParticipationById(idUser) {
+    try {
+      console.log("idUser :",idUser)
+      const meetings = await axios.get(API_URL + `getParticipationByIdUser/${idUser}`, {
+        headers: authHeader(),
+      });
+      return meetings;
     } catch (e) {
       console.log(e);
     }
@@ -32,9 +45,9 @@ class UserService {
     return;
   }
 
-  async getMeetingParticipationById(idUser) {
+  async getParticipationByIdOwner(idOwner) {
     try {
-      const meetings = await axios.get(API_URL + `getParticipationByIdUser/${idUser}`, {
+      const meetings = await axios.get(API_URL + `getParticipationByIdOwner/${idOwner}`, {
         headers: authHeader(),
       });
       return meetings.data;
@@ -70,3 +83,4 @@ class UserService {
   }
 }
 export default new UserService();
+

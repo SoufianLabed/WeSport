@@ -282,7 +282,7 @@ const styles = StyleSheet.create({
   },
   peopleText:{
     fontSize:18,
-    fontWeight:'1000'
+    fontWeight:'900'
   },
   content:{
       paddingLeft:10,

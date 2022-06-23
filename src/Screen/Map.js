@@ -1,5 +1,5 @@
 import { useContext,useState,useEffect } from 'react';
-import { Button, StyleSheet, Text, View,Dimensions,Image, Switch } from 'react-native';
+import { Button, StyleSheet, Text, View,Dimensions,Image, Switch,Pressable } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import tailwind from 'tailwind-rn';
 import AppContext from '../context/AppContext'
@@ -17,7 +17,6 @@ const Map = ({navigation}) =>{
   useEffect(() => {
     (async () => {
       let meetings = await userService.getMeeting()
-      console.log("meetings",meetings.data);
       setMeetings(meetings.data)
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
@@ -33,7 +32,6 @@ const Map = ({navigation}) =>{
 
   const refreshData = async () =>{
     let meetings = await userService.getMeeting()
-    console.log("meetings",meetings.data);
     setMeetings(meetings.data)
   }
 
@@ -58,6 +56,7 @@ const Map = ({navigation}) =>{
   function renderRandomMarkers(meetings) {
   
     console.log(meetings)
+    let sport
     return meetings.map((meeting, i) => (
     
       <Marker
@@ -66,8 +65,7 @@ const Map = ({navigation}) =>{
           latitude: parseFloat(meeting.latitude),
           longitude: parseFloat(meeting.longitude)
         }}
-        icon={require( `../../assets/marker-football.png`)}
-        style={{width:200}}
+        icon={require( `../../assets/marker-${"football"}.png`)}
       >
         <Callout>
         <View style={tailwind('flex flex-row')}>
