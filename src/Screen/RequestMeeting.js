@@ -30,213 +30,96 @@ const Meetings =  ({ navigation: { navigate } },{}) =>  {
 
   const {userContext, setUserContext} = useContext(UserContext)
 
+  const [meetingCreated,setmeetingCreated] = useState({})
   useEffect(()=>{
-      const meetingCreatedFetch = async () =>{
-          return await userService.getMeetingByIdOwner(userContext.id)
-      }
-
-      const meetingParticipationFetch = async () =>{
-          return await userService.getMeetingParticipationById(userContext.id)
-      }
-
-      const meetingCreated = meetingCreatedFetch()
-      const meetingParticipation = meetingParticipationFetch()
+        (async()=>{
+            let meetingCreatedFetch = await userService.getParticipationByIdOwner(userContext.id)
+            console.log("meetingCreatedFetch",meetingCreatedFetch)
+            setmeetingCreated(meetingCreatedFetch)
+        })();
 
   },[])
 
-  const CONTENT = [
-      {
-          isExpanded: false,
-          category_name:'Activités crées',
-          subcategory:[
-              {id:1,val:'Sub 1'},
-              {id:2,val:'Sub 2'},
-              ]
-      },
-      {
-          isExpanded: false,
-          category_name:'Activités à laquelle je suis participant',
-          subcategory:[
-              {id:3,val:'Sub 4'},
-              {id:4,val:'Sub 5'},
-              ]
-      },
-      {
-          isExpanded: false,
-          category_name:'Activité en attente d\'acceptation',
-          subcategory:[
-              {id:5,val:'Sub 6'},
-              {id:6,val:'Sub 7'},
-              ]
-      },
-
-
-  ]
-  const [listDataSource, setlistDataSource] = useState(CONTENT)
-
-  const updateLayout = (index) =>{
-      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-      const array = [...listDataSource];
-          array[index]['isExpanded'] = !array[index]['isExpanded']
-      
-      setlistDataSource(array)
-  }
-
-  const ExpandableComponent = ({item,onClickFunction}) =>{
-      const [layoutHeight, setlayoutheight] = useState(0);
-
-      useEffect(()=>{
-          if(item.isExpanded){
-              setlayoutheight(null);
-          }else{
-              setlayoutheight(0)
-          }
-      },[item.isExpanded])
-      return (
-          <View style={styles.expandable}>
-              <TouchableOpacity style={styles.item} onPress={onClickFunction}>
-                  <Text style={styles.itemText}>
-                      {item.category_name}
-                  </Text>
-              </TouchableOpacity>
-              <View style={{height:layoutHeight,overflow:'hidden'}}>
-                  {
-                      item.subcategory.map((item,key)=>(
-                          <TouchableOpacity
-                              key={key}
-                              style={styles.content}
-                          >
-                              <View style={tailwind('flex flex-row  ')}>
-                                  <View >
-                                      <Text style={tailwind('mt-4 text-lg')}>Basket</Text>
-                                      <Text>Idrissa Mguye</Text>
-                                      <View style={tailwind('flex flex-row ')}>
-                                          <View style={tailwind('flex flex-row  mt-2')}>
-                                              <Feather
-                                                  name='calendar'
-                                                  size={20}
-                                              />
-                                              <Text>11/08/2022</Text> 
-                                          </View>
-                                          <View style={tailwind('flex flex-row  mt-2 ml-3')}>
-                                              <Feather
-                                                  name='clock'
-                                                  size={20}
-                                              />
-                                              <Text>18H</Text> 
-                                          </View>                                      
-                                      </View>
-                                      <View style={tailwind('mt-3 flex flex-row')}>
-                                          <Feather
-                                              name='map-pin'
-                                              size={20}
-                                          />
-                                          <Text>41 Rue Leclerc - Paris</Text>
-                                      </View>
-                                      
-                                  </View>
-
-                                  <View style={tailwind('absolute top-0 right-0 h-16 w-20 mt-3')}>
-                                      <Pressable style={styles.button}>
-                                          <Text style={styles.buttonText}>Voir</Text>
-                                      </Pressable>
-                                      <Pressable style={styles.button}>
-                                          <Text style={styles.buttonText}>Supprimer</Text>
-                                      </Pressable>
-                                  </View>
-                              </View>
-                              <View style={styles.separator}>
-
-                              </View>
-                          </TouchableOpacity>
-                      ))
-                  }
-              </View>
-          </View>
-      )
-  }
+  console.log("test igo",meetingCreated)
 
   return (
+
+    
     <SafeAreaView style={{flex:1,marginTop:50}}>
-      <View style={styles.container}>
-          <View style={styles.header}>
-              <ScrollView>
-              <View style={styles.expandable}>
-              <TouchableOpacity style={styles.item}>
-                <View>
-                  <Text style={styles.itemText}>
-                    Basket
-                  </Text>
-                  <Text>
-                    2 personnes manquantes
-                  </Text>
-                </View>
 
-              </TouchableOpacity>
-              <View style={{overflow:'hidden'}}>
-
-                    <View style={tailwind('flex flex-row  ')}>
-                          <View >
-                              <View style={tailwind('flex flex-row ')}>
+        {Object(meetingCreated).map(meeting =>{
+            return(
+                <View style={styles.container}>
+                <View style={styles.header}>
+                    <View>
+                    <View style={styles.expandable}>
+      
+                    <View style={[{overflow:'hidden'},{borderRadius:20,padding:10,borderColor:'black',borderWidth:2}]}>
+      
+                          <View style={tailwind('flex flex-row  ')}>
+                                <View >
+                                    <View style={tailwind('flex flex-row ')}>
+                                        <View style={tailwind('flex flex-row  mt-2')}>
+                                            <Feather
+                                                name='calendar'
+                                                size={20}
+                                            />
+                                            <Text>11/08/2022</Text> 
+                                        </View>
+                                        <View style={tailwind('flex flex-row  mt-2 ml-3')}>
+                                            <Feather
+                                                name='clock'
+                                                size={20}
+                                            />
+                                            <Text>18H</Text> 
+                                        </View>
+                                      <View style={tailwind('flex flex-row mt-2 ml-3')}>
+                                        <Feather
+                                            name='map-pin'
+                                            size={20}
+                                        />
+                                        <Text>41 Rue Leclerc - Paris</Text>
+                                      </View>                                    
+                                    </View>
+      
+                                    
+                                </View>
+                          </View>
+                        
+                        <View
+                            style={[styles.content]}
+                        >
+                            <View style={[tailwind('flex flex-row  ')]}>   
+                                <View style={[tailwind('flex flex-row ')]}>
                                   <View style={tailwind('flex flex-row  mt-2')}>
-                                      <Feather
-                                          name='calendar'
-                                          size={20}
-                                      />
-                                      <Text>11/08/2022</Text> 
+                                      <Text style={styles.peopleText}>Njie Gueye</Text> 
                                   </View>
-                                  <View style={tailwind('flex flex-row  mt-2 ml-3')}>
-                                      <Feather
-                                          name='clock'
-                                          size={20}
-                                      />
-                                      <Text>18H</Text> 
+                                </View>
+      
+                                <View style={styles.containerButton}>
+                                  <View style={styles.buttonAction1}>
+                                    <TouchableOpacity style={styles.buttonText1}><Text style={tailwind('text-white text-center')}>Accepter</Text></TouchableOpacity>
                                   </View>
-                                <View style={tailwind('flex flex-row mt-2 ml-3')}>
-                                  <Feather
-                                      name='map-pin'
-                                      size={20}
-                                  />
-                                  <Text>41 Rue Leclerc - Paris</Text>
-                                </View>                                    
-                              </View>
-
-                              
-                          </View>
+                                  <TouchableOpacity style={styles.buttonAction2}>
+                                    <Text style={styles.buttonText2}>
+                                      <Icon name="close"> </Icon>
+                                    </Text>
+                                  </TouchableOpacity>
+                                </View>
+                            </View>
+                            <View style={styles.separator}>
+      
+                            </View>
+                            
+                        </View>
+      
                     </View>
-                  
-                  <TouchableOpacity
-                      style={styles.content}
-                  >
-                      <View style={tailwind('flex flex-row  ')}>   
-                          <View style={tailwind('flex flex-row ')}>
-                            <View style={tailwind('flex flex-row  mt-2')}>
-                                <Text style={styles.peopleText}>Njie Gueye</Text> 
-                            </View>
-                          </View>
-
-                          <View style={styles.containerButton}>
-                            <View style={styles.buttonAction1}>
-                              <Text style={styles.buttonText1}>Accepter</Text>
-                            </View>
-                            <View style={styles.buttonAction2}>
-                              <Text style={styles.buttonText2}>
-                                <Icon name="close"> </Icon>
-                              </Text>
-                            </View>
-                          </View>
-                      </View>
-                      <View style={styles.separator}>
-
-                      </View>
-                      
-                  </TouchableOpacity>
-
-              </View>
-          </View>
-              </ScrollView>
-          </View>
-      </View>
+                </View>
+                    </View>
+                </View>
+            </View>
+            )
+        })}
     </SafeAreaView>
   );
 }

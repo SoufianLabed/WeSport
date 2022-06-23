@@ -113,16 +113,35 @@ class UserService {
     return;
   }
 
-  async putParticipation(participation){
+  async postParticipation(participation){
     try {
-      const meetings = await axios.put(API_URL + "createParticipation", {
-        "id":user.id,
-        "player_id":user.username,
-        "rencontre_id":user.email,
-        "status":""
+      console.log(participation)
+      const meetings = await axios.post(API_URL + "createParticipation", {
+        "playerId":participation.rencontre_id,
+        "rencontreId":participation.player_id,
+        "status":"WAITING_APPROVAL"
       } ,{
         headers: authHeader(),
       
+      });
+      return meetings;
+    } catch (e) {
+      console.log(e);
+    }
+
+    return;
+
+  }
+
+  async putParticipation(participation){
+    try {
+      const meetings = await axios.put(API_URL + "^articipation", {
+        "id":participation.id,
+        "player_id":participation.username,
+        "rencontre_id":participation.email,
+        "status":"WAITING_APPROVAL"
+      } ,{
+        headers: authHeader(),
       });
       return meetings;
     } catch (e) {

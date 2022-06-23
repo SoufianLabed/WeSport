@@ -152,7 +152,6 @@ const Meetings = ({ navigation: { navigate } }, {}) => {
       </View>
     );
   };
-
   return (
     <SafeAreaView style={{ flex: 1, marginTop: 50 }}>
       <View style={styles.container}>
