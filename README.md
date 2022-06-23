@@ -77,3 +77,5 @@ OR :
 Licensed under the [MIT](LICENSE) license.
 
 ## 🎩Contributor
+
+Soufian - Nahidath - Paul - Loic - Sami
