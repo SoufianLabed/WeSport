@@ -149,7 +149,19 @@ const styles = StyleSheet.create({
         color: '#F6F9FA',
         fontWeight: 'bold',
         textAlign: 'center'
-  }
+  },
+    // textInput: {
+    //     flex: 1,
+    //     paddingLeft: 10,
+    //     color: '#05375a',
+    //     borderWidth : 1,
+    //     height: 49,
+    //     borderTopLeftRadius: 8,
+    //     borderTopRightRadius: 8,
+    //     borderBottomLeftRadius: 8,
+    //     borderBottomRightRadius: 8,
+    //     borderColor : '#3C5BAA',
+    // },
   });
   
 export default Map;
