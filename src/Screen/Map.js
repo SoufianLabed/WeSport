@@ -55,8 +55,6 @@ const Map = ({navigation}) =>{
 
   function renderRandomMarkers(meetings) {
   
-    console.log(meetings)
-    let sport
     return meetings.map((meeting, i) => (
     
       <Marker
@@ -67,8 +65,8 @@ const Map = ({navigation}) =>{
         }}
         icon={require( `../../assets/marker-${"football"}.png`)}
       >
-        <Callout>
-        <View style={tailwind('flex flex-row')}>
+        <Callout style={tailwind('rounded-lg')}>
+        <View style={tailwind('flex flex-row   ')}>
             <View >
                 <Text style={tailwind('mt-4 text-lg')}>Basket</Text>
                 <Text>Idrissa Mguye</Text>

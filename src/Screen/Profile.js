@@ -13,7 +13,7 @@ import {
 
 import AppContext from '../context/AppContext'
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scroll-view";
-import BottomNavigation from "../../styles/BottomNavigation";
+
 
 const Profile = ({ navigation: { navigate } }) => {
 
@@ -88,9 +88,6 @@ const Profile = ({ navigation: { navigate } }) => {
             scrollEnabled={true}>
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Image style={styles.profilPicture}>
-
-                    </Image>
                     <Pressable style={styles.cameraButton}>
                         <Feather
                             name='camera'
@@ -107,31 +104,6 @@ const Profile = ({ navigation: { navigate } }) => {
                             style={styles.textInput}
                             autoCapitalize='none'
                             onChangeText={(val) => textInputChange(val)}
-                        />
-                        {data.check_TextInputChange ?
-                            <Feather
-                                style={styles.iconInput}
-                                name='check-circle'
-                                color='green'
-                                size={20} />
-                            : null}
-                        <Feather
-                            style={styles.iconInput}
-                            name='edit-2'
-                            color='#3C5BAA'
-                            size={20}
-                            onPress={() => activModify()}
-                        />
-                    </View>
-
-                    <Text style={styles.text_footer}>Numéro de téléphone</Text>
-                    <View style={styles.action}>
-                        <TextInput
-                            placeholder="Ex : 06 66 82 97 85"
-                            style={styles.textInput}
-                            autoCapitalize='none'
-                            keyboardType='number-pad'
-                            onChangeText={(val) => handleUsernameChange(val)}
                         />
                         {data.check_TextInputChange ?
                             <Feather
@@ -205,7 +177,6 @@ const Profile = ({ navigation: { navigate } }) => {
                     </Pressable>
                 </View>
             </View>
-            <BottomNavigation/>
         </KeyboardAwareScrollView>
 
     );

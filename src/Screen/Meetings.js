@@ -35,7 +35,11 @@ const Meetings = ({ navigation: { navigate } }, {}) => {
     const fetchData = async () => {
         let responseParticipation =
           await userService.getMeetingParticipationById(userContext.id);
-        setmeetingParticipation(responseParticipation.data);
+          setmeetingParticipation(responseParticipation.data);
+          
+        /// STATE A JOUR
+
+        console.log("ICI MON GARS",responseParticipation.data)
         let response = await userService.getMeetingByIdOwner(userContext.id);
         setmeetingCreated(response.data);
 

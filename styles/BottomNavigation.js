@@ -4,29 +4,15 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import * as React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 
-function Feed() {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Feed!</Text>
-        </View>
-    );
-}
+import Login from '../src/Screen/Login';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Map from '../src/Screen/Map'
+import Home from '../src/Screen/Home';
+import CreateMeeting from '../src/Screen/CreateMeeting';
+import RequestMeeting from '../src/Screen/RequestMeeting';
+import Meetings from '../src/Screen/Meetings';
+import Profile from '../src/Screen/Profile'
 
-function Profile() {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Profile!</Text>
-        </View>
-    );
-}
-
-function Notifications() {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Notifications!</Text>
-        </View>
-    );
-}
 
 const CustomButton = ({children, onPress}) => (
     <TouchableOpacity
@@ -51,8 +37,9 @@ const Tab = createBottomTabNavigator();
 function BottomNavigation () {
     return (
         <Tab.Navigator
-            initialRouteName="New Activity"
+            initialRouteName="Map"
             screenOptions={{
+                headerShown: false,
                 tabBarShowLabel: false,
                 tabBarStyle: {
                     backgroundColor: '#F5F9FA',
@@ -72,8 +59,8 @@ function BottomNavigation () {
             // labeled = {false}
         >
             <Tab.Screen
-                name="Home"
-                component={Feed}
+                name="Map"
+                component={Map}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons name="home" color={color} size={26} />
@@ -82,7 +69,7 @@ function BottomNavigation () {
             />
             <Tab.Screen
                 name="Messages"
-                component={Notifications}
+                component={RequestMeeting}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons name="message" color={color} size={26} />
@@ -91,7 +78,7 @@ function BottomNavigation () {
             />
             <Tab.Screen
                 name="New Activity"
-                component={Profile}
+                component={CreateMeeting}
                 options={{
                     tabBarIcon: () => (
                         <MaterialCommunityIcons name="plus-circle" color='#091833' size={53}/>
@@ -103,7 +90,7 @@ function BottomNavigation () {
             />
             <Tab.Screen
                 name="Notifications"
-                component={Profile}
+                component={Meetings}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons name="bell" color={color} size={26} />

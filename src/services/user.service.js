@@ -17,6 +17,19 @@ class UserService {
     return;
   }
 
+  async getUser(idUser) {
+    try {
+      const meetings = await axios.get(API_URL + `user/${idUser}`, {
+        headers: authHeader(),
+      });
+      return meetings;
+    } catch (e) {
+      console.log(e);
+    }
+
+    return;
+  }
+
 
   async getMeetingByIdOwner(idOwner) {
     try {
