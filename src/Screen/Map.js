@@ -1,5 +1,5 @@
-import React, { useContext,useState,useEffect } from 'react';
-import { Button, StyleSheet, Text, View,Dimensions,Image, Pressable } from 'react-native';
+import { useContext,useState,useEffect } from 'react';
+import { Button, StyleSheet, Text, View,Dimensions,Image, Switch, Pressable } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import tailwind from 'tailwind-rn';
 import AppContext from '../context/AppContext'
@@ -7,7 +7,7 @@ import {Marker, Callout } from 'react-native-maps';
 import MapView from "react-native-map-clustering";
 import * as Location from 'expo-location';
 import userService from '../services/user.service';
-import Feather from 'react-native-vector-icons/Feather';
+import Feather from "react-native-vector-icons/Feather";
 
 const Map = ({navigation}) =>{
   const [location, setLocation] = useState(null);
@@ -31,6 +31,12 @@ const Map = ({navigation}) =>{
     })();
   }, []);
 
+  const refreshData = async () =>{
+    let meetings = await userService.getMeeting()
+    console.log("meetings",meetings.data);
+    setMeetings(meetings.data)
+  }
+
 
   const [text, setText] = useState('')
   const {counter, setCounter} = useContext(AppContext)
@@ -50,14 +56,17 @@ const Map = ({navigation}) =>{
 
 
   function renderRandomMarkers(meetings) {
+  
+    console.log(meetings)
     return meetings.map((meeting, i) => (
+    
       <Marker
         key={i}
         coordinate={{
           latitude: parseFloat(meeting.latitude),
           longitude: parseFloat(meeting.longitude)
         }}
-        icon={require('../../assets/MarkerFootball.png')}
+        icon={require( `../../assets/marker-football.png`)}
         style={{width:200}}
       >
         <Callout>
@@ -104,17 +113,13 @@ const Map = ({navigation}) =>{
   
   return (
     <View style={styles.container}>
-        {/*<TextInput*/}
-        {/*    placeholder="Ex : Rafael David "*/}
-        {/*    style={styles.textInput}*/}
-        {/*    autoCapitalize='none'*/}
-        {/*/>*/}
+      
       <MapView
         initialRegion={initialRegion}
         style={styles.map}>
         {renderRandomMarkers(meetings)}
       </MapView>
-
+      <Feather name="refresh-ccw" style={{position:'absolute',top:0,right:0,marginTop:30,marginRight:30}} size={30} onPress={()=>refreshData()}/>
         
   </View>
   );
