@@ -12,7 +12,7 @@ const Dots = ({ selected }) => {
     return (
         <View
             style={{
-                marginBottom: 650,
+                marginBottom: 700,
                 marginHorizontal: 3,
                 width: 10,
                 height: 10,
@@ -46,7 +46,7 @@ const Next = ({...props}) => (
             style={styles.footerSwp}
             {...props}
         >
-            <Text style={{color : '#3C5BAA', fontSize: 17, fontWeight: 'bold'}}>Next
+            <Text style={{color : '#3C5BAA', fontSize: 17, fontWeight: 'bold', left : 60}}>Next
             <Feather
                 name='arrow-right'
                 color='#3C5BAA'
@@ -80,19 +80,19 @@ const SwiperStarter = ({navigation}) => {
         pages={[
           {
             backgroundColor: '#F5F9FA',
-            image: <Image source={require('../../images/sport-climat-visuel.jpg')} style={styles.imgSwp}/>,
+            image: <Image source={require('../../images/swiper-1.png')} style={styles.imgSwp}/>,
             title: 'Retrouve des sportifs !',
             subtitle: 'Trouve des événements ou crée-les !',
           },
           {
             backgroundColor: '#F5F9FA',
-            image: <Image source={require('../../images/placeholder-.png')} style={styles.imgSwp}/>,
+            image: <Image source={require('../../images/swiper-2.png')} style={styles.imgSwp}/>,
             title: 'Séléctionne les endroits',
             subtitle: 'Près de chez toi ou renseigne une ville précise',
           },
           {
             backgroundColor: '#F5F9FA',
-            image: <Image source={require('../../images/placeholder-.png')} style={styles.imgSwp}/>,
+            image: <Image source={require('../../images/swiper-3.png')} style={styles.imgSwp}/>,
             title: 'Envoi un message',
             subtitle: "Un événement te plaît, envoi un message",
           },
@@ -110,30 +110,26 @@ const styles = StyleSheet.create({
     width : 180
   },
   imgSwp: {
-      height : 391,
-      top : 0,
-      width : '100%',
-      marginTop:-300
+      height : 300,
+      width : 400,
+      bottom : 50
   },
   titleOB: {
       color :'#091833',
       fontWeight : "bold",
       fontSize : 25,
-      top : 20
+      bottom : 100
   },
   subtitleOB: {
       color : '#091833',
       fontSize : 16,
-      top : 50
+      bottom : 80
 
   },
   footerSwp: {
       color : '#3C5BAA',
       padding : 15,
-      left: 50,
-
-
-
+      left : 20
   },
 
 });
