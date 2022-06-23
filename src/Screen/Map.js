@@ -46,8 +46,8 @@ const Map = ({navigation}) =>{
   };
 
   const initialRegion = {
-    latitude: 37.72825,
-    longitude: -122.4324,
+    latitude: 48.856614,
+    longitude: 2.3522219,
     latitudeDelta: 0.25,
     longitudeDelta: 0.15
   };
