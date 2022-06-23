@@ -31,17 +31,16 @@ const Meetings = ({ navigation: { navigate } }, {}) => {
   const [meetingParticipation, setmeetingParticipation] = useState([]);
   const [listDataSource, setlistDataSource] = useState([]);
 
+
   useEffect(() => {
     const fetchData = async () => {
         let responseParticipation =
           await userService.getMeetingParticipationById(userContext.id);
-          setmeetingParticipation(responseParticipation.data);
-          
-        /// STATE A JOUR
+        setmeetingParticipation(responseParticipation.data);
 
-        console.log("ICI MON GARS",responseParticipation.data)
         let response = await userService.getMeetingByIdOwner(userContext.id);
         setmeetingCreated(response.data);
+
 
         console.log("1:", meetingParticipation);
         console.log("2:", meetingCreated);
