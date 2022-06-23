@@ -8,11 +8,14 @@ import MapView from "react-native-map-clustering";
 import * as Location from 'expo-location';
 import userService from '../services/user.service';
 import Feather from "react-native-vector-icons/Feather";
+import { UserContext } from '../context/AppContextLogin';
 
 const Map = ({navigation}) =>{
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [meetings,setMeetings] = useState([]);
+
+  const { userContext, setUserContext } = useContext(UserContext);
 
   useEffect(() => {
     (async () => {
@@ -35,6 +38,14 @@ const Map = ({navigation}) =>{
     setMeetings(meetings.data)
   }
 
+
+  const participate = async (idPlayer, idMeeting) =>{
+    const participation = {
+      "player_id": idPlayer,
+      "rencontre_id":idMeeting
+    }
+    await userService.postParticipation(participation)
+  }
 
   const [text, setText] = useState('')
   const {counter, setCounter} = useContext(AppContext)
@@ -65,7 +76,7 @@ const Map = ({navigation}) =>{
        // icon={require( "../../assets/marker-football.png")}
       >
 
-        <Callout style={tailwind('rounded-lg w-56')}>
+        <Callout style={tailwind('rounded-lg w-56')}  onPress={()=>participate(meeting.id,userContext.id)}>
         <View style={tailwind('flex flex-row   ')}>
             <View >
                 <Text style={tailwind('mt-4 text-lg')}>{meeting.sport}</Text>
@@ -96,11 +107,7 @@ const Map = ({navigation}) =>{
                 
             </View>
 
-            <View style={tailwind('absolute top-0 right-0 h-16 w-20 mt-3')}>
-                <Pressable style={styles.button}>
-                    <Text style={styles.buttonText}>Participer</Text>
-                </Pressable>
-            </View>
+
         </View>
         </Callout>
       </Marker>
