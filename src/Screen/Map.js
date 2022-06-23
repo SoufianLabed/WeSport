@@ -90,10 +90,6 @@ const Map = ({navigation}) =>{
                         <Text>{new Date(meeting.plannedAt).getFullYear()+"/"+new Date(meeting.plannedAt).getMonth()+"/"+new Date(meeting.plannedAt).getDate() }</Text> 
                     </View>
                     <View style={tailwind('flex flex-row  mt-2 ml-3')}>
-                        <Feather
-                            name='clock'
-                            size={20}
-                        />
                         <Text>{new Date(meeting.plannedAt).getHours()+" : "+new Date(meeting.plannedAt).getMinutes()}</Text> 
                     </View>                                      
                 </View>
@@ -170,6 +166,12 @@ const Map = ({navigation}) =>{
               <Text style={{color : '#09183399', fontStyle : 'italic'}}>Basket</Text>
               <Text style={{color : '#09183399', fontStyle : 'italic'}}>Volley</Text>
           </View>
+          <Feather
+           name='refresh-cw'
+           size={20}
+           onPress={()=>refreshData()}
+           style={{bottom:0,position:'absolute',right:0}}
+         />
       </View>
     </View>
   );

@@ -30,7 +30,7 @@ const Meetings = ({ navigation: { navigate } }, {}) => {
   const [meetingCreated, setmeetingCreated] = useState([]);
   const [meetingParticipation, setmeetingParticipation] = useState([]);
   const [listDataSource, setlistDataSource] = useState([]);
-
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,8 +42,8 @@ const Meetings = ({ navigation: { navigate } }, {}) => {
         setmeetingCreated(response.data);
 
 
-        console.log("1:", meetingParticipation);
-        console.log("2:", meetingCreated);
+        console.log("1:  ", meetingParticipation);
+        console.log("2: ", meetingCreated);
 
         let i = 0;
         while (i < meetingParticipation["meetings"].length) {
@@ -118,28 +118,25 @@ const Meetings = ({ navigation: { navigate } }, {}) => {
             <TouchableOpacity key={key} style={styles.content}>
               <View style={tailwind("flex flex-row  ")}>
                 <View>
-                  <Text style={tailwind("mt-4 text-lg")}>{key}</Text>
-                  <Text>Idrissa Mguye</Text>
+                  <Text>{item.sport}</Text>
                   <View style={tailwind("flex flex-row ")}>
                     <View style={tailwind("flex flex-row  mt-2")}>
                       <Feather name="calendar" size={20} />
-                      <Text>11/08/2022</Text>
+                      <Text>{new Date(item.plannedAt).getFullYear()+"/"+new Date(item.plannedAt).getMonth()+"/"+new Date(item.plannedAt).getDate() }</Text>
                     </View>
                     <View style={tailwind("flex flex-row  mt-2 ml-3")}>
                       <Feather name="clock" size={20} />
-                      <Text>18H</Text>
+                      <Text>{new Date(item.plannedAt).getHours()+" : "+new Date(item.plannedAt).getMinutes()}</Text>
                     </View>
                   </View>
                   <View style={tailwind("mt-3 flex flex-row")}>
                     <Feather name="map-pin" size={20} />
-                    <Text>41 Rue Leclerc - Paris</Text>
+                    <Text>{item.address}</Text>
                   </View>
                 </View>
 
                 <View style={tailwind("absolute top-0 right-0 h-16 w-20 mt-3")}>
-                  <Pressable style={styles.button}>
-                    <Text style={styles.buttonText}>Voir</Text>
-                  </Pressable>
+
                   <Pressable style={styles.button}>
                     <Text style={styles.buttonText}>Supprimer</Text>
                   </Pressable>
@@ -152,6 +149,7 @@ const Meetings = ({ navigation: { navigate } }, {}) => {
       </View>
     );
   };
+  
   return (
     <SafeAreaView style={{ flex: 1, marginTop: 50 }}>
       <View style={styles.container}>

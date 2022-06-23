@@ -89,7 +89,7 @@ const CreateMeeting = ({ navigation: { navigate } }) => {
     meeting.longitude = locationInput.geometry.location.lng,
     meeting.city = locationInput.address_components[2].long_name,
     meeting.address= locationInput.formatted_address
-    console.log("meet",meeting)
+    console.log("meet ",meeting)
 
     await userService.postMeeting(meeting)
     
@@ -245,7 +245,7 @@ const CreateMeeting = ({ navigation: { navigate } }) => {
             createMeeting()
         }}
       >
-        <Text style={styles.text}>TEST</Text>
+        <Text style={styles.text}>CREATE</Text>
       </TouchableHighlight>
     </View>
   );
