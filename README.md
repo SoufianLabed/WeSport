@@ -51,6 +51,8 @@ Application mobile basé sur React Native, qui permet de trouver des sportifs, o
 
 - Profile
 
+- Google Place Autocomplete
+
 ## 🎩Sources
 
 Backend (Spring) : https://github.com/SoufianLabed/We-sport_back
