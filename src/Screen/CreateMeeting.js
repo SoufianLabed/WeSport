@@ -165,7 +165,7 @@ const CreateMeeting = ({ navigation: { navigate } }) => {
                         setLocationInput(detail)
                     }}
                     query={{
-                        key: "AIzaSyBu3rpxeGURsWeIpnTy6oZkgtVbqqtjiNs",
+                        key: "MY-API-KEY",
                         language: "fr",
                     }}
                 />
